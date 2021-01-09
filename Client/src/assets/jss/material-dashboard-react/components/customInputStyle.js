@@ -7,6 +7,7 @@ import {
 } from "assets/jss/material-dashboard-react.js";
 
 const customInputStyle = {
+
   disabled: {
     "&:before": {
       backgroundColor: "transparent !important"
@@ -32,12 +33,16 @@ const customInputStyle = {
     }
   },
   labelRoot: {
+
     ...defaultFont,
     color: grayColor[3] + " !important",
     fontWeight: "400",
     fontSize: "14px",
     lineHeight: "1.42857",
-    letterSpacing: "unset"
+    letterSpacing: "unset",
+    right:0
+
+    
   },
   labelRootError: {
     color: dangerColor[0]
@@ -63,7 +68,10 @@ const customInputStyle = {
     paddingBottom: "10px",
     margin: "27px 0 0 0",
     position: "relative",
-    verticalAlign: "unset"
+    verticalAlign: "unset",
+    "& .MuiInputLabel-formControl": {
+      left:'none'
+    }
   }
 };
 

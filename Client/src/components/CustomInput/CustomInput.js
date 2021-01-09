@@ -40,6 +40,9 @@ export default function CustomInput(props) {
   });
   return (
     <FormControl
+    formControlProps={{
+      left:-1
+    }}
       {...formControlProps}
       className={formControlProps.className + " " + classes.formControl}
     >
@@ -48,6 +51,7 @@ export default function CustomInput(props) {
           className={classes.labelRoot + labelClasses}
           htmlFor={id}
           {...labelProps}
+
         >
           {labelText}
         </InputLabel>
