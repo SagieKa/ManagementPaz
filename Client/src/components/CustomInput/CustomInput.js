@@ -57,6 +57,7 @@ export default function CustomInput(props) {
         </InputLabel>
       ) : null}
       <Input
+        onChange={(e)=>console.log(e.target.id +':'+ e.target.value)}
         classes={{
           root: marginTop,
           disabled: classes.disabled,

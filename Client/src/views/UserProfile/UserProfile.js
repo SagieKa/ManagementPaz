@@ -9,11 +9,11 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import { useState } from "react";
 
-import avatar from "assets/img/faces/marc.jpg";
+
 
 const styles = {
   cardCategoryWhite: {
@@ -38,6 +38,7 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+  const [date,setDate]=useState('')
   return (
     <div>
       <GridContainer>
@@ -51,8 +52,9 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="שם הנכס"
+                    labelText="תאריך קניה"
                     id="company-disabled"
+                    onChange ={console.log('e.target.value')}
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -67,7 +69,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="Username"
+                    labelText="תאריך מסירה"
                     id="username"
                     formControlProps={{
                       fullWidth: true
@@ -76,7 +78,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Email address"
+                    labelText='פרוייקט'
                     id="email-address"
                     formControlProps={{
                       fullWidth: true
@@ -87,7 +89,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="First Name"
+                    labelText="בנק מלווה"
                     id="first-name"
                     formControlProps={{
                       fullWidth: true
@@ -96,7 +98,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
-                    labelText="Last Name"
+                    labelText="יזם"
                     id="last-name"
                     formControlProps={{
                       fullWidth: true
@@ -107,7 +109,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="City"
+                    labelText="עיר"
                     id="city"
                     formControlProps={{
                       fullWidth: true
@@ -116,7 +118,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Country"
+                    labelText="כתובת"
                     id="country"
                     formControlProps={{
                       fullWidth: true
@@ -125,7 +127,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="בניין"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -134,7 +136,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="קומה"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -143,7 +145,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="מספר"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -152,7 +154,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="חדרים"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -161,7 +163,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="גודל(מ''ר)"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -170,7 +172,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="מרפסת(מ''ר)"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -179,7 +181,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="מחסן"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -188,7 +190,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="חניות"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -197,7 +199,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="מחיר קניה"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -206,7 +208,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="שווי נוכחי"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -215,7 +217,7 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="הלוואות"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
@@ -224,22 +226,14 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
-                    labelText="Postal Code"
+                    labelText="תזרים"
                     id="postal-code"
                     formControlProps={{
                       fullWidth: true
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
+
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
@@ -263,25 +257,287 @@ export default function UserProfile() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>הכנס אנשי קשר</h4>
+              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+            </CardHeader>
+            <CardBody>
+
+
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="סוג"
+                    id="city"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="שם החברה"
+                    id="country"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="שם מלא"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="תפקיד"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="טלפון"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="מייל"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+ 
+  
+
+              </GridContainer>
+
             </CardBody>
+            <CardFooter>
+              <Button color="primary">הוסף</Button>
+            
+            </CardFooter>
+            <CardFooter>
+              <Button color="primary"> נכס</Button>
+            
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>תפעולי  </h4>
+              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+            </CardHeader>
+            <CardBody>
+
+
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="כללי"
+                    id="city"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="פירוט"
+                    id="country"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="סטטוס"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="תאריך"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="ח.מס\קבלה"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="הערות"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+ 
+  
+
+              </GridContainer>
+
+            </CardBody>
+            <CardFooter>
+              <Button color="primary">הוסף</Button>
+            
+            </CardFooter>
+            <CardFooter>
+              <Button color="primary"> נכס</Button>
+            
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>פיננסי</h4>
+              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+            </CardHeader>
+            <CardBody>
+
+              
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="כללי"
+                    id="city"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="פירוט"
+                    id="country"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="הודעת תשלום"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="תשלום"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="תאריך"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="ערבות בנקאית"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="ח.מס\קבלה"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="מע''מ"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="מתווה פיננסי"
+                    id="postal-code"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+ 
+
+
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={12}>
+                
+                  <CustomInput
+                    labelText="הערות רושמים כאן"
+                    id="about-me"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      multiline: true,
+                      rows: 1
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+            <CardFooter>
+              <Button color="primary">הוסף נכס</Button>
+            </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
