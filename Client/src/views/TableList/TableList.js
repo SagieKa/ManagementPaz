@@ -46,7 +46,7 @@ export default function TableList() {
   const classes = useStyles();
   const [TableDate,setTableDate]= useState([])
   useEffect(()=>{
-    const assetRef = firebase.database().ref('assets/1')
+    const assetRef = firebase.database().ref('assets/asset')
     assetRef.on('value', (snapshot)=>{
       var asset=snapshot.val()
       console.log(asset)
@@ -59,17 +59,17 @@ export default function TableList() {
          asset['contractor'],
          asset['city'],
          asset['adress'],
-         asset['Building'],
+         asset['building'],
          asset['floor'],
          asset['number'],
          asset['rooms'],
          asset['Size(sqm)'],
-         asset['Terrace(sqm)'],
+         asset['terrace(sqm)'],
          asset['Storage'],
          asset['Parking'],
          asset['purchase-price'],
-         asset['Current-value'],
-         asset['Loans'],
+         asset['current-value'],
+         asset['loans'],
          asset['flow'],
          
         

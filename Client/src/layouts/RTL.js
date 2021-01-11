@@ -17,6 +17,7 @@ import styles from "assets/jss/material-dashboard-react/layouts/rtlStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
+import DashData from '../DashContent'
 
 let ps;
 
@@ -41,6 +42,9 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function RTL({ ...rest }) {
+  const [store,setStore]=React.useState({
+    data:['1','2']
+  })
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -93,6 +97,7 @@ export default function RTL({ ...rest }) {
     };
   }, [mainPanel]);
   return (
+    <DashData.Provider value={{store,setStore}}>
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
@@ -132,5 +137,6 @@ export default function RTL({ ...rest }) {
         /> */}
       </div>
     </div>
+    </DashData.Provider>
   );
 }

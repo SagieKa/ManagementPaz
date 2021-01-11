@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from  '../../utils/firebase'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,9 +12,47 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import Contants from './contants'
+import Operative from './operative'
+import Financial from './financial'
+import DashData from '../../DashContent'
 
+const assetFormat = {
+  'buy-date':'',
+  'delivery-date':'',
+  'project':'',
+  'bank':'',
+  'entrepreneur':'',
+  'city':'',
+  'adress':'',
+  'building':'',
+  'floor':'',
+  'number':'',
+  'rooms':'',
+  'size(sqm)':'',
+  'terrace(sqm)':'',
+  'storage':'',
+  'parking':'',
+  'purchase-price':'',
+  'current-value':'',
+  'loans':'',
+  'flow':'',
+  'check':{
+    1:'1',
+    2:'2'
+  }
+}
 
+const contantFormat = {
+  'id':0,
+  'contants-type':'',
+  'contants-company-name':'',
+  'contants-fullname':'',
+  'contants-role':'',
+  'contants-phone-number':'',
+  'contants-mail':'',
+}
 
 const styles = {
   cardCategoryWhite: {
@@ -37,8 +76,89 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+  const {store,setStore}=useContext(DashData)
+  console.log(store)
   const classes = useStyles();
-  const [date,setDate]=useState('')
+  const [asset , setAsset] = useState(assetFormat)
+  
+  const [contantObject, setContantObject] =useState(contantFormat)
+  const [contants,setContants]= useState({0:{...contantFormat}})
+  const [operativeObject, setOperativeObject] =useState('')
+  const [financialObject, setFinancialObject] =useState('')
+  
+  const [contantNum,setContantNum]=useState(1)
+  const [operativeNum,setOperativeNum]=useState(1)
+  const [financialNum,setFinancialNum]=useState(1)
+  
+  const handleINCustomInput= (type,value,)=>{
+    const regexContant = new RegExp('contants')
+    const regexOperative = new RegExp('operative')
+    const regexFinancial= new RegExp('financial')
+    console.log('the vlaue:')
+    console.log(contants)
+    if(regexContant.test(type)) AddContants(type,value,contants)
+    if(regexOperative.test(type)) console.log('sucsess')
+    if(regexFinancial.test(type)) console.log('sucsess')
+    else AddAseet(type,value);
+    
+  }
+  const [contant,setContant]=useState([<Contants send={handleINCustomInput} id={0}/>])
+  const [operative,setOperative]=useState([<Operative send={handleINCustomInput} id={0}/>])
+  const [financial,setFinancial]=useState([<Financial send={handleINCustomInput} id={0}/>])
+
+  const addContant =()=>{
+    var num = contantNum
+    var newcontants = {...contants}
+    newcontants[num] = {...contantFormat}
+    setContants(newcontants)
+    setContant([...contant,<Contants send={handleINCustomInput} id={contantNum}/>])
+    setContantNum(num+1)
+    
+  }
+  const addOperative =()=>{
+    var num = operativeNum
+    setOperative([...operative,<Operative send={handleINCustomInput} id={operativeNum}/>])
+    setOperativeNum(num+1)
+  }
+  const addFinancial =()=>{
+    var num = financialNum
+    setFinancial([...financial,<Financial send={handleINCustomInput} id={financialNum}/>])
+    setFinancialNum(num+1)
+  }
+
+  const AddAseet = (type,value) =>{
+    const object ={}
+    object[type]=value
+    setAsset({
+      ...asset,
+      ...object})
+  }
+  function AddContants(type,value,con){
+    console.log(contants)
+    var num = type.charAt(type.length-1);
+    var newType = type.replace(num,'')
+    const object ={}
+    object[newType]=value
+    // console.log(contants)
+    var prevArr = {...contants}
+    // console.log(prevArr)
+    // // console.log(prevArr)
+    prevArr[num][newType]=value
+    // console.log(prevArr)
+    setContants(prevArr)
+
+    }
+  
+  
+  const pushAseetsToDb=()=>{
+    console.log(asset)
+    console.log(contants)
+    firebase.database().ref('assets/asset').set(
+      asset
+    );
+  }
+
+
   return (
     <div>
       <GridContainer>
@@ -52,9 +172,10 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
+                    send={handleINCustomInput}
                     labelText="תאריך קניה"
-                    id="company-disabled"
-                    onChange ={console.log('e.target.value')}
+                    id="buy-date"
+                
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -69,8 +190,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
+                   send={handleINCustomInput}
                     labelText="תאריך מסירה"
-                    id="username"
+                    id="delivery-date"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -78,8 +200,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                   send={handleINCustomInput}
                     labelText='פרוייקט'
-                    id="email-address"
+                    id="project"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -89,8 +212,9 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="בנק מלווה"
-                    id="first-name"
+                    id="bank"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -98,8 +222,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="יזם"
-                    id="last-name"
+                    id="entrepreneur"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -109,6 +234,7 @@ export default function UserProfile() {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="עיר"
                     id="city"
                     formControlProps={{
@@ -118,8 +244,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="כתובת"
-                    id="country"
+                    id="adress"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -127,8 +254,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="בניין"
-                    id="postal-code"
+                    id="building"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -136,8 +264,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="קומה"
-                    id="postal-code"
+                    id="floor"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -145,8 +274,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="מספר"
-                    id="postal-code"
+                    id="number"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -154,8 +284,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="חדרים"
-                    id="postal-code"
+                    id="rooms"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -163,8 +294,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="גודל(מ''ר)"
-                    id="postal-code"
+                    id="size(sqm)"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -172,8 +304,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="מרפסת(מ''ר)"
-                    id="postal-code"
+                    id="terrace(sqm)"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -181,8 +314,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="מחסן"
-                    id="postal-code"
+                    id="storage"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -190,8 +324,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="חניות"
-                    id="postal-code"
+                    id="parking"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -199,8 +334,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="מחיר קניה"
-                    id="postal-code"
+                    id="purchase-price"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -208,8 +344,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="שווי נוכחי"
-                    id="postal-code"
+                    id="current-value"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -217,8 +354,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="הלוואות"
-                    id="postal-code"
+                    id="loans"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -226,8 +364,9 @@ export default function UserProfile() {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="תזרים"
-                    id="postal-code"
+                    id="flow"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -239,6 +378,7 @@ export default function UserProfile() {
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
                   <CustomInput
+                  send={handleINCustomInput}
                     labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
                     id="about-me"
                     formControlProps={{
@@ -253,7 +393,7 @@ export default function UserProfile() {
               </GridContainer>
             </CardBody>
             <CardFooter>
-              <Button color="primary">הוסף נכס</Button>
+              <Button color="primary" onClick={pushAseetsToDb}>הוסף נכס</Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -267,75 +407,16 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
+                  {contant.map((item, i)=>{
+                    return(item)
+                  })}
 
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="סוג"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="שם החברה"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="שם מלא"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="תפקיד"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="טלפון"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="מייל"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
- 
-  
-
-              </GridContainer>
+                    
+            
 
             </CardBody>
             <CardFooter>
-              <Button color="primary">הוסף</Button>
-            
-            </CardFooter>
-            <CardFooter>
-              <Button color="primary"> נכס</Button>
-            
+              <Button color="primary" onClick={addContant}>הוסף איש קשר נוסף</Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -349,70 +430,14 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
+            {operative.map((item, i)=>{
+                    return(item)
+                  })}
 
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="כללי"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="פירוט"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="סטטוס"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="תאריך"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="ח.מס\קבלה"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="הערות"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
- 
-  
-
-              </GridContainer>
 
             </CardBody>
             <CardFooter>
-              <Button color="primary">הוסף</Button>
+              <Button color="primary" onClick={addOperative}> תפעולי הוסף</Button>
             
             </CardFooter>
             <CardFooter>
@@ -431,112 +456,13 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
-              
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="כללי"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="פירוט"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="הודעת תשלום"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="תשלום"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="תאריך"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="ערבות בנקאית"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="ח.מס\קבלה"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="מע''מ"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="מתווה פיננסי"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
- 
-
-
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                
-                  <CustomInput
-                    labelText="הערות רושמים כאן"
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 1
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+            {financial.map((item, i)=>{
+                    return(item)
+                  })}
+            
             </CardBody>
             <CardFooter>
-              <Button color="primary">הוסף נכס</Button>
+              <Button color="primary" onClick={addFinancial}>הוסף פינססי</Button>
             </CardFooter>
           </Card>
         </GridItem>
