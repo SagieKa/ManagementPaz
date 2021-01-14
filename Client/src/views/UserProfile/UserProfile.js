@@ -199,37 +199,7 @@ export default function UserProfile() {
         }, 1000)})
 
   }
-  // const getTheNumber = ()=>{
-  //   try{
-  //       var number=0
-  //       const assetRef = firebase.database().ref('assets')
-  //       assetRef.on('value', (snapshot)=>{
-  //         var assetdB= snapshot.val()
-  //       console.log('hi i am try')
-  //       return new Promise(resolve => {
-  //         setTimeout(function() {
-  //         var a= Object.getOwnPropertyNames(assetdB)
-  //         console.log(a)
-  //         number =a.length
-  //         resolve(number)
-  //       }, 1000)
-  //     })
-  //   })}
-  //     catch{
 
-  //       console.log('hi i am catch')
-  //       return new Promise(resolve => {
-  //         var number=0
-  //         setTimeout(function() {
-  //         resolve(number)
-  //       }, 1000)
-  //     })
-    
-  
-  
-  //   }
-
-  // }
   async function pushAseetsToDb(){
      const A = await orderAseets()
      const number = await getTheNumber()
