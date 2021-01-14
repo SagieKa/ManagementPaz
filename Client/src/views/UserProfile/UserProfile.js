@@ -100,8 +100,7 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
-  // const {store,setStore}=useContext(DashData)
- 
+
   const classes = useStyles();
   const [asset , setAsset] = useState(assetFormat)
 
@@ -111,10 +110,6 @@ export default function UserProfile() {
   const [contants,setContants]= useState([])
   const [operatives,setOperatives]= useState([])
   const [financials,setFinancials]= useState([])
-  
-  const [assetNum,setAssetNum]=useState(0)
-  const [operativeNum,setOperativeNum]=useState(1)
-  const [financialNum,setFinancialNum]=useState(1)
   
   const handleINCustomInput= (type,value)=>{
     const regexContant = new RegExp('contants')
