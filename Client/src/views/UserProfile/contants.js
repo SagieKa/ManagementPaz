@@ -38,6 +38,12 @@ export default function Contants(props){
     const id=props.id
     const send = props.send
     const classes = useStyles();
+    const [type,setType]=useState('')
+    const [companyName,setCompanyName]=useState('')
+    const [fullName,setFullName]=useState('')
+    const [subject,setSubject]=useState('')
+    const [phone,setPhone]=useState('')
+    const [mail,setMail]=useState('')
     
 
     return (
@@ -46,7 +52,7 @@ export default function Contants(props){
         <CustomInput
         send={send}
           labelText="סוג"
-          id={"contants-type"+id}
+          id={"contantsType"+id}
           formControlProps={{
             fullWidth: true
           }}
@@ -56,7 +62,7 @@ export default function Contants(props){
         <CustomInput
         send={send}
           labelText="שם החברה"
-          id={"contants-company-name"+id}
+          id={"contantsCompanyName"+id}
           formControlProps={{
             fullWidth: true
           }}
@@ -64,9 +70,9 @@ export default function Contants(props){
       </GridItem>
       <GridItem xs={12} sm={12} md={4}>
         <CustomInput
-        send={send}
+          send={send}
           labelText="שם מלא"
-          id={'contants-fullname'+id}
+          id={'contantsFullname'+id}
           formControlProps={{
             fullWidth: true
           }}
@@ -76,7 +82,7 @@ export default function Contants(props){
         <CustomInput
         send={send}
           labelText="תפקיד"
-          id={"contants-role"+id}
+          id={"contantsRole"+id}
           formControlProps={{
             fullWidth: true
           }}
@@ -86,7 +92,7 @@ export default function Contants(props){
         <CustomInput
         send={send}
           labelText="טלפון"
-          id={"contants-phone-number"+id}
+          id={"contantsPhoneNumber"+id}
           formControlProps={{
             fullWidth: true
           }}
@@ -96,7 +102,7 @@ export default function Contants(props){
         <CustomInput
         send={send}
           labelText="מייל"
-          id={"contants-mail"+id}
+          id={"contantsMail"+id}
           formControlProps={{
             fullWidth: true
           }}

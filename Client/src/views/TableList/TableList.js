@@ -46,34 +46,63 @@ export default function TableList() {
   const classes = useStyles();
   const [TableDate,setTableDate]= useState([])
   useEffect(()=>{
-    const assetRef = firebase.database().ref('assets/asset')
+    const assetRef = firebase.database().ref('assets')
+    console.log(assetRef)
     assetRef.on('value', (snapshot)=>{
+      console.log(snapshot.length)
       var asset=snapshot.val()
       console.log(asset)
-      setTableDate([...TableDate ,
-         asset['buy-date'],
-         asset['delivery-date'],
-         asset['project'],
-         asset['bank'],
-         asset['entrepreneur'],
-         asset['contractor'],
-         asset['city'],
-         asset['adress'],
-         asset['building'],
-         asset['floor'],
-         asset['number'],
-         asset['rooms'],
-         asset['Size(sqm)'],
-         asset['terrace(sqm)'],
-         asset['Storage'],
-         asset['Parking'],
-         asset['purchase-price'],
-         asset['current-value'],
-         asset['loans'],
-         asset['flow'],
+      asset.map((o,i)=>{
+        console.log(o.entrepreneur)
+        setTableDate(prev=>[...prev ,
+          [asset[i]['buy-date'],
+          asset[i]['delivery-date'],
+          asset[i]['project'],
+          asset[i]['bank'],
+          asset[i]['entrepreneur'],
+          asset[i]['contractor'],
+          asset[i]['city'],
+          asset[i]['adress'],
+          asset[i]['building'],
+          asset[i]['floor'],
+          asset[i]['number'],
+          asset[i]['rooms'],
+          asset[i]['size(sqm)'],
+          asset[i]['terrace(sqm)'],
+          asset[i]['storage'],
+          asset[i]['parking'],
+          asset[i]['purchase-price'],
+          asset[i]['current-value'],
+          asset[i]['loans'],
+          asset[i]['flow']]
+          
+         
+         ])
+      })
+    //   setTableDate([...TableDate ,
+    //      asset['buy-date'],
+    //      asset['delivery-date'],
+    //      asset['project'],
+    //      asset['bank'],
+    //      asset['entrepreneur'],
+    //      asset['contractor'],
+    //      asset['city'],
+    //      asset['adress'],
+    //      asset['building'],
+    //      asset['floor'],
+    //      asset['number'],
+    //      asset['rooms'],
+    //      asset['size(sqm)'],
+    //      asset['terrace(sqm)'],
+    //      asset['storage'],
+    //      asset['parking'],
+    //      asset['purchase-price'],
+    //      asset['current-value'],
+    //      asset['loans'],
+    //      asset['flow'],
          
         
-        ])
+    //     ])
       
     })
   },[])
@@ -91,7 +120,7 @@ export default function TableList() {
             <Table 
               tableHeaderColor="primary"
               tableHead={["תאריך קניה", "תאריך מסירה", "פרוייקט", "בנק מלווה" ,"יזם","קבלן","עיר","כתובת","בניין","קומה","מספר","חדרים","גודל(מ''ר)","מרפסת(מ''ר)","מחסן","חניות","מחיר קניה","שווי נוכחי","הלוואות","תזרים"]}
-              tableData={[TableDate]}
+              tableData={[...TableDate]}
               // tableData={[
               //   ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
               //   ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
@@ -119,7 +148,7 @@ export default function TableList() {
               tableHeaderColor="primary"
               tableHead={["תאריך קניה", "תאריך מסירה", "פרוייקט", "בנק מלווה" ,"יזם","קבלן","עיר","כתובת","בניין","קומה","מספר","חדרים","גודל(מ''ר)","מרפסת(מ''ר)","מחסן","חניות","מחיר קניה","שווי נוכחי","הלוואות","תזרים"]}
               // tableHead={["ID", "Name", "Country", "City", "Salary"]}
-              tableData={[TableDate]}
+              tableData={[...TableDate]}
               // tableData={[
               //   ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
               //   ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],

@@ -3,6 +3,7 @@ import firebase from  '../../utils/firebase'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+import Alert from '@material-ui/lab/Alert';
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -19,39 +20,62 @@ import Financial from './financial'
 import DashData from '../../DashContent'
 
 const assetFormat = {
-  'buy-date':'',
-  'delivery-date':'',
-  'project':'',
-  'bank':'',
-  'entrepreneur':'',
-  'city':'',
-  'adress':'',
-  'building':'',
-  'floor':'',
-  'number':'',
-  'rooms':'',
-  'size(sqm)':'',
-  'terrace(sqm)':'',
-  'storage':'',
-  'parking':'',
-  'purchase-price':'',
-  'current-value':'',
-  'loans':'',
-  'flow':'',
-  'check':{
-    1:'1',
-    2:'2'
-  }
+  'buy-date':'-',
+  'delivery-date':'-',
+  'project':'-',
+  'bank':'-',
+  'contractor':'-',
+  'entrepreneur':'-',
+  'city':'-',
+  'adress':'-',
+  'building':'-',
+  'floor':'-',
+  'number':'-',
+  'rooms':'-',
+  'size(sqm)':'-',
+  'terrace(sqm)':'-',
+  'storage':'-',
+  'parking':'-',
+  'purchase-price':'-',
+  'current-value':'-',
+  'loans':'-',
+  'flow':'-',
+  // 'check':{
+  //   1:'1',
+  //   2:'2'
+  // }
 }
 
 const contantFormat = {
   'id':0,
-  'contants-type':'',
-  'contants-company-name':'',
-  'contants-fullname':'',
-  'contants-role':'',
-  'contants-phone-number':'',
-  'contants-mail':'',
+  'contantsType':'-',
+  'contantsCompanyName':'-',
+  'contantsFullname':'-',
+  'contantsRole':'-',
+  'contantsPhoneNumber':'-',
+  'contantsMail':'-',
+}
+const operativeFormat = {
+  'id':0,
+  'operative-general':'-',
+  'operative-details':'-',
+  'operative-status':'-',
+  'operative-date':'-',
+  'operative-acceptance':'-',
+  'operative-remarks':'-',
+}
+const financialFormat = {
+  'id':0,
+  'financial-general':'-',
+  'financial-details':'-',
+  'financial-message-payment':'-',
+  'financial-payment':'-',
+  'financial-date':'-',
+  'financial-bankait':'-',
+  'financial-Acceptance':'-',
+  'financial-vat':'-',
+  'financial-financial':'-',
+  'financial-remarks':'-',
 }
 
 const styles = {
@@ -76,89 +100,189 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
-  const {store,setStore}=useContext(DashData)
-  console.log(store)
+  // const {store,setStore}=useContext(DashData)
+ 
   const classes = useStyles();
   const [asset , setAsset] = useState(assetFormat)
-  
+
   const [contantObject, setContantObject] =useState(contantFormat)
-  const [contants,setContants]= useState({0:{...contantFormat}})
-  const [operativeObject, setOperativeObject] =useState('')
-  const [financialObject, setFinancialObject] =useState('')
+  const [operativeObject, setOperativeObject] =useState(operativeFormat)
+  const [financialObject, setFinancialObject] =useState(financialFormat)
+  const [contants,setContants]= useState([])
+  const [operatives,setOperatives]= useState([])
+  const [financials,setFinancials]= useState([])
   
-  const [contantNum,setContantNum]=useState(1)
+  const [assetNum,setAssetNum]=useState(0)
   const [operativeNum,setOperativeNum]=useState(1)
   const [financialNum,setFinancialNum]=useState(1)
   
-  const handleINCustomInput= (type,value,)=>{
+  const handleINCustomInput= (type,value)=>{
     const regexContant = new RegExp('contants')
     const regexOperative = new RegExp('operative')
     const regexFinancial= new RegExp('financial')
-    console.log('the vlaue:')
-    console.log(contants)
-    if(regexContant.test(type)) AddContants(type,value,contants)
-    if(regexOperative.test(type)) console.log('sucsess')
-    if(regexFinancial.test(type)) console.log('sucsess')
+    
+    if(regexContant.test(type)) {AddContants(type,value)}
+    else if(regexOperative.test(type)) AddOperative(type,value)
+    else if(regexFinancial.test(type)) AddFinancial(type,value)
     else AddAseet(type,value);
     
   }
-  const [contant,setContant]=useState([<Contants send={handleINCustomInput} id={0}/>])
+  const [contant,setContant]=useState([<Contants pressAddContant={pressAddContant} send={handleINCustomInput} id={0}/>])
   const [operative,setOperative]=useState([<Operative send={handleINCustomInput} id={0}/>])
   const [financial,setFinancial]=useState([<Financial send={handleINCustomInput} id={0}/>])
 
-  const addContant =()=>{
-    var num = contantNum
-    var newcontants = {...contants}
-    newcontants[num] = {...contantFormat}
-    setContants(newcontants)
-    setContant([...contant,<Contants send={handleINCustomInput} id={contantNum}/>])
-    setContantNum(num+1)
-    
-  }
-  const addOperative =()=>{
-    var num = operativeNum
-    setOperative([...operative,<Operative send={handleINCustomInput} id={operativeNum}/>])
-    setOperativeNum(num+1)
-  }
-  const addFinancial =()=>{
-    var num = financialNum
-    setFinancial([...financial,<Financial send={handleINCustomInput} id={financialNum}/>])
-    setFinancialNum(num+1)
-  }
-
   const AddAseet = (type,value) =>{
+    console.log(type + ' '+ value)
     const object ={}
     object[type]=value
     setAsset({
       ...asset,
       ...object})
   }
-  function AddContants(type,value,con){
-    console.log(contants)
+  function AddContants(type,value){
     var num = type.charAt(type.length-1);
     var newType = type.replace(num,'')
     const object ={}
     object[newType]=value
-    // console.log(contants)
-    var prevArr = {...contants}
-    // console.log(prevArr)
-    // // console.log(prevArr)
-    prevArr[num][newType]=value
-    // console.log(prevArr)
-    setContants(prevArr)
-
+    setContantObject(prev=>({...prev,id:num,...object}))
+    }
+  function AddOperative(type,value){
+    var num = type.charAt(type.length-1);
+    var newType = type.replace(num,'')
+    const object ={}
+    object[newType]=value
+    setOperativeObject(prev=>({...prev,id:num,...object}))
+    }
+  function AddFinancial(type,value){
+    var num = type.charAt(type.length-1);
+    var newType = type.replace(num,'')
+    const object ={}
+    object[newType]=value
+    setFinancialObject(prev=>({...prev,id:num,...object}))
     }
   
-  
-  const pushAseetsToDb=()=>{
-    console.log(asset)
-    console.log(contants)
-    firebase.database().ref('assets/asset').set(
-      asset
-    );
+    const  pressAddContant = () =>{
+      console.log(contantObject)
+    setContants(prev=>([...prev,contantObject]))
+   
+  }
+    const  pressAddOperative = () =>{
+      console.log(contantObject)
+    setOperatives(prev=>([...prev,operativeObject]))
+   
+  }
+    const  pressAddFinancial = () =>{
+      console.log(contantObject)
+      setFinancials(prev=>([...prev,financialObject]))
+   
   }
 
+  const getTheNumber = ()=>{
+    var number=0
+    
+      console.log('hi i am try')
+        const assetRef = firebase.database().ref('assets')
+        assetRef.on('value', (snapshot)=>{
+          var assetdB= snapshot.val()
+          try{
+           
+          number =assetdB.length}
+          catch{number=0}
+          console.log(number)
+          console.log(assetdB)
+    })
+            return new Promise(resolve => {
+          setTimeout(function() {
+            console.log('i am promise 2')
+            console.log(number)
+          resolve(number)
+        }, 1000)})
 
+  }
+  // const getTheNumber = ()=>{
+  //   try{
+  //       var number=0
+  //       const assetRef = firebase.database().ref('assets')
+  //       assetRef.on('value', (snapshot)=>{
+  //         var assetdB= snapshot.val()
+  //       console.log('hi i am try')
+  //       return new Promise(resolve => {
+  //         setTimeout(function() {
+  //         var a= Object.getOwnPropertyNames(assetdB)
+  //         console.log(a)
+  //         number =a.length
+  //         resolve(number)
+  //       }, 1000)
+  //     })
+  //   })}
+  //     catch{
+
+  //       console.log('hi i am catch')
+  //       return new Promise(resolve => {
+  //         var number=0
+  //         setTimeout(function() {
+  //         resolve(number)
+  //       }, 1000)
+  //     })
+    
+  
+  
+  //   }
+
+  // }
+  async function pushAseetsToDb(){
+     const A = await orderAseets()
+     const number = await getTheNumber()
+     console.log('the number of pushDb:')
+     console.log(number)
+     
+
+    firebase.database().ref(`assets/${number}`).set(
+      {...asset, ...A[0],...A[1],...A[2]}
+    );
+
+}
+
+const orderAseets= async()=>{
+  var objectC={Contant:{}}
+  var objectO={Operative:{}}
+  var objectF={Financial:{}}
+
+  contants.map((object,i)=>{
+      objectC['Contant'][i]=object
+  })
+  operatives.map((object,i)=>{
+      objectO['Operative'][i]=object
+  })
+  financials.map((object,i)=>{
+      objectF['Financial'][i]=object
+  })
+  //  assetRef.on('value', (snapshot)=>{
+  //   var assetdB= snapshot.val()
+  //   try{
+  //     console.log('hi i am try')
+  //     var a= Object.getOwnPropertyNames(assetdB)
+  //     number =a.length
+  //    console.log(number)
+  // }
+  //   catch{
+  //     console.log('hi i am catch')
+  //     number=0
+  //   }
+
+
+  // }
+  
+  // )
+  return new Promise(resolve => {
+    setTimeout(function() {
+      console.log('hi i am in the promise')
+      resolve([objectC,objectO,objectF ])
+      console.log("fast promise is done")
+    }, 1000)
+  })
+ 
+}
   return (
     <div>
       <GridContainer>
@@ -210,7 +334,7 @@ export default function UserProfile() {
                 </GridItem>
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                   send={handleINCustomInput}
                     labelText="בנק מלווה"
@@ -220,11 +344,21 @@ export default function UserProfile() {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                   send={handleINCustomInput}
                     labelText="יזם"
                     id="entrepreneur"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                    labelText="קבלן"
+                    id="contractor"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -407,6 +541,24 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
+              {contants.length!=0?((
+                contants.map((object,i)=>{return(
+
+                  <Alert onClose={() => {console.log('hi')}}>{
+                    
+                    i+'->'+
+                    'סוג:'+object.contantsType+' '+
+                    'שם החברה:'+object.contantsCompanyName+' '+
+                    'שם מלא:'+object.contantsFullname+' '+
+                    'תפקיד:'+object.contantsRole+' '+
+                    'טלפון:'+object.contantsPhoneNumber+' '+
+                    'מייל:'+object.contantsMail+' '
+                
+                  }</Alert>
+                )})
+              )):''}
+           
+ 
                   {contant.map((item, i)=>{
                     return(item)
                   })}
@@ -416,7 +568,7 @@ export default function UserProfile() {
 
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={addContant}>הוסף איש קשר נוסף</Button>
+              <Button color="primary" onClick={pressAddContant}>הוסף איש קשר נוסף</Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -430,6 +582,25 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
+            {operatives.length!=0?((
+                operatives.map((object,i)=>{return(
+
+                  <Alert onClose={() => {console.log('hi')}}>
+                    {
+                    
+                    i+'->'+
+                    'כללי:'+object['operative-general']+' '+
+                    'פירוט:'+object["operative-details"]+' '+
+                    'סטטוס:'+object["operative-status"]+' '+
+                    'תאריך:'+object["operative-date"]+' '+
+                    'ח.מס\קבלה:'+object["operative-acceptance"]+' '+
+                    'הערות:'+object["operative-remarks"]+' '
+  
+                
+                  }
+                  </Alert>
+                )})
+              )):''}
             {operative.map((item, i)=>{
                     return(item)
                   })}
@@ -437,7 +608,7 @@ export default function UserProfile() {
 
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={addOperative}> תפעולי הוסף</Button>
+              <Button color="primary" onClick={pressAddOperative}> תפעולי הוסף</Button>
             
             </CardFooter>
             <CardFooter>
@@ -456,13 +627,33 @@ export default function UserProfile() {
             </CardHeader>
             <CardBody>
 
+            {financials.length!=0?((
+                financials.map((object,i)=>{return(
+
+                  <Alert onClose={() => {console.log('hi')}}>{
+                    
+                    i+'->'+
+                    'כללי:'+object['financial-general']+' '+
+                    'פירוט:'+object['financial-details']+' '+
+                    'הודעת תשלום:'+object['financial-message-payment']+' '+
+                    'תשלום:'+object['financial-payment']+' '+
+                    'תאריך:'+object['financial-date']+' '+
+                    'ערבות בנקאית:'+object['financial-bankait']+' '+
+                    'ח.מס\קבלה:'+object['financial-Acceptance']+' '+
+                    "מע''מ:"+object['financial-vat']+' '+
+                    "מתווה פיננסי:"+object['financial-financial']+' '+
+                    "הערות:"+object['financial-remarks']+' '
+                
+                  }</Alert>
+                )})
+              )):''}
             {financial.map((item, i)=>{
                     return(item)
                   })}
             
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={addFinancial}>הוסף פינססי</Button>
+              <Button color="primary" onClick={pressAddFinancial}>הוסף פינססי</Button>
             </CardFooter>
           </Card>
         </GridItem>
