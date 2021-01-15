@@ -36,7 +36,7 @@ export default function Icons() {
             <Hidden only={["sm", "xs"]}>
               <iframe
                 className={classes.iframe}
-                src="https://material.io/icons/"
+                src="https://goo.gl/maps/sfNjdanafdtip6zb9"
                 title="Icons iframe"
               >
                 <p>Your browser does not support iframes.</p>

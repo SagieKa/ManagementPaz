@@ -38,19 +38,11 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "דשבורד",
-    icon: Dashboard,
-    component: DashboardPage,
-    layout: "/admin"
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "פרופיל משתמש",
-    icon: Person,
-    component: UserProfile,
+    path: "/rtl-page",
+    name: "RTL Support",
+    rtlName: "דף מידע",
+    icon: Language,
+    component: RTLPage,
     layout: "/rtl"
   },
   {
@@ -62,12 +54,20 @@ const dashboardRoutes = [
     layout: "/rtl"
   },
   {
+    path: "/user",
+    name: "User Profile",
+    rtlName: "הוספת נכס",
+    icon: Person,
+    component: UserProfile,
+    layout: "/rtl"
+  },
+  {
     path: "/typography",
     name: "Typography",
-    rtlName: "טופוגרפי",
+    rtlName: "עריכת נכס",
     icon: LibraryBooks,
     component: Typography,
-    layout: "/admin"
+    layout: "/rtl"
   },
   {
     path: "/icons",
@@ -94,21 +94,21 @@ const dashboardRoutes = [
     layout: "/rtl"
   },
   {
-    path: "/rtl-page",
-    name: "RTL Support",
-    rtlName: "תמיכה בימין לשמאל",
-    icon: Language,
-    component: RTLPage,
-    layout: "/rtl"
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: " שמאל לימין דשבורד",
+    icon: Dashboard,
+    component: DashboardPage,
+    layout: "/admin"
   },
   {
     path: "/upgrade-to-pro",
     name: "Upgrade To PRO",
-    rtlName: "שדרג לימין לשמאל",
+    rtlName: "שדרג למשהו",
     icon: Unarchive,
     component: UpgradeToPro,
     layout: "/admin"
-  }
+  },
 ];
 
 export default dashboardRoutes;

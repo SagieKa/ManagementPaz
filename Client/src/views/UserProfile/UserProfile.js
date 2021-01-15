@@ -222,23 +222,7 @@ const orderAseets= async()=>{
   financials.map((object,i)=>{
       objectF['Financial'][i]=object
   })
-  //  assetRef.on('value', (snapshot)=>{
-  //   var assetdB= snapshot.val()
-  //   try{
-  //     console.log('hi i am try')
-  //     var a= Object.getOwnPropertyNames(assetdB)
-  //     number =a.length
-  //    console.log(number)
-  // }
-  //   catch{
-  //     console.log('hi i am catch')
-  //     number=0
-  //   }
 
-
-  // }
-  
-  // )
   return new Promise(resolve => {
     setTimeout(function() {
       console.log('hi i am in the promise')
@@ -264,6 +248,7 @@ const orderAseets= async()=>{
                     send={handleINCustomInput}
                     labelText="תאריך קניה"
                     id="buy-date"
+                    inputProps
                 
                     formControlProps={{
                       fullWidth: true ,
