@@ -18,6 +18,7 @@ import Part1Edit from './Part1Edit'
 import Part2Edit from './Part2Edit'
 import Part3Edit from './Part3Edit'
 import Part4Edit from './Part4Edit'
+import Part5Edit from './Part5Edit'
 import Done from './Done'
 import Start from './Start'
 import DashData from '../../DashContent'
@@ -76,6 +77,7 @@ export default function TypographyPage() {
      <Part2Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Contant']}/>,
       <Part3Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Operative']}/>,
       <Part4Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Financial']}/>,
+      <Part5Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Renter']}/>,
       <Done/> ])},[])
   useEffect(()=>{
         setNumAssets(store.assets.length)
@@ -102,6 +104,7 @@ export default function TypographyPage() {
   <Part2Edit id={numID} nis={changeStore['Contant']}/>,
   <Part3Edit id={numID} nis={changeStore['Operative']}/>,
   <Part4Edit id={numID} nis={changeStore['Financial']}/>,
+  <Part5Edit id={numID} nis={changeStore['Renter']}/>,
   <Done/> ])
   };
   var lis = [];

@@ -17,6 +17,7 @@ import { useState,useContext } from "react";
 import Contants from './contants'
 import Operative from './operative'
 import Financial from './financial'
+import Renters  from './Renters'
 import DashData from '../../DashContent'
 import Asset from '../Formats/assetFormat'
 const assetFormat = Asset
@@ -52,6 +53,24 @@ const financialFormat = {
   'financial-financial':'-',
   'financial-remarks':'-',
 }
+const renterFormat = {
+  'id':0,
+  'renters-count':'-',
+  'renters-city':'-',
+  'renters-name-project':'-',
+  'renters-status':'-',
+  'renters-first-date':'-',
+  'renters-last-date':'-',
+  'renters-name-one':'-',
+  '"renters-telephone-one':'-',
+  'renters-name-two':'-',
+  'renters-telephone-two':'-',
+  'renters-moneys':'-',
+  'renters-managment-name':'-',
+  'renters-water':'-',
+  'renters-elec':'-',
+  'renters-Municipality':'-',
+}
 
 const styles = {
   cardCategoryWhite: {
@@ -82,24 +101,29 @@ export default function UserProfile() {
   const [contantObject, setContantObject] =useState(contantFormat)
   const [operativeObject, setOperativeObject] =useState(operativeFormat)
   const [financialObject, setFinancialObject] =useState(financialFormat)
+  const [renterObject, setRenterObject] =useState(renterFormat)
   const [contants,setContants]= useState([])
   const [operatives,setOperatives]= useState([])
   const [financials,setFinancials]= useState([])
+  const [renters,setRenters]= useState([])
   
   const handleINCustomInput= (type,value)=>{
     const regexContant = new RegExp('contants')
     const regexOperative = new RegExp('operative')
     const regexFinancial= new RegExp('financial')
+    const regexRenter= new RegExp('renters')
     
     if(regexContant.test(type)) {AddContants(type,value)}
     else if(regexOperative.test(type)) AddOperative(type,value)
     else if(regexFinancial.test(type)) AddFinancial(type,value)
+    else if(regexRenter.test(type)) AddRenter(type,value)
     else AddAseet(type,value);
     
   }
   const [contant,setContant]=useState([<Contants pressAddContant={pressAddContant} send={handleINCustomInput} id={0}/>])
   const [operative,setOperative]=useState([<Operative send={handleINCustomInput} id={0}/>])
   const [financial,setFinancial]=useState([<Financial send={handleINCustomInput} id={0}/>])
+  const [renter,setRenter]=useState([<Renters send={handleINCustomInput} id={0}/>])
 
   const AddAseet = (type,value) =>{
     console.log(type + ' '+ value)
@@ -131,6 +155,14 @@ export default function UserProfile() {
     setFinancialObject(prev=>({...prev,id:num,...object}))
     }
   
+  function AddRenter(type,value){
+    var num = type.charAt(type.length-1);
+    var newType = type.replace(num,'')
+    const object ={}
+    object[newType]=value
+    setRenterObject(prev=>({...prev,id:num,...object}))
+    }
+  
     const  pressAddContant = () =>{
       console.log(contantObject)
     setContants(prev=>([...prev,contantObject]))
@@ -144,6 +176,11 @@ export default function UserProfile() {
     const  pressAddFinancial = () =>{
       console.log(contantObject)
       setFinancials(prev=>([...prev,financialObject]))
+   
+  }
+    const  pressAddRenters = () =>{
+      console.log(renterObject)
+      setRenters(prev=>([...prev,renterObject]))
    
   }
 
@@ -178,7 +215,7 @@ export default function UserProfile() {
      
 
     firebase.database().ref(`assets/${number}`).set(
-      {...asset, ...A[0],...A[1],...A[2]}
+      {...asset, ...A[0],...A[1],...A[2],...A[3]}
     );
 
 }
@@ -187,6 +224,7 @@ const orderAseets= async()=>{
   var objectC={Contant:{}}
   var objectO={Operative:{}}
   var objectF={Financial:{}}
+  var objectR={Renter:{}}
 
   contants.map((object,i)=>{
       objectC['Contant'][i]=object
@@ -197,11 +235,14 @@ const orderAseets= async()=>{
   financials.map((object,i)=>{
       objectF['Financial'][i]=object
   })
+  renters.map((object,i)=>{
+      objectR['Renter'][i]=object
+  })
 
   return new Promise(resolve => {
     setTimeout(function() {
       console.log('hi i am in the promise')
-      resolve([objectC,objectO,objectF ])
+      resolve([objectC,objectO,objectF,objectR ])
       console.log("fast promise is done")
     }, 1000)
   })
@@ -579,6 +620,51 @@ const orderAseets= async()=>{
             </CardBody>
             <CardFooter>
               <Button color="primary" onClick={pressAddFinancial}>הוסף פינססי</Button>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>שוכרים</h4>
+              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+            </CardHeader>
+            <CardBody>
+
+            {renters.length!=0?((
+                renters.map((object,i)=>{return(
+
+                  <Alert onClose={() => {console.log('hi')}}>{
+                    
+                    i+'->'+
+                    'מס:'+object['renters-count']+' '+
+                    'עיר:'+object['renters-city']+' '+
+                    ":שם הפרוייקט"+object['renters-name-project']+' '+
+                    'סטטוס:'+object['renters-status']+' '+
+                    'תאריך התחלה:'+object['renters-first-date']+' '+
+                    'תאריך גמר:'+object['renters-last-date']+' '+
+                    'שם-1:'+object['renters-name-one']+' '+
+                    "טלפון-1:"+object['renters-telephone-one']+' '+
+                    "שם-2:"+object['renters-name-two']+' '+
+                    "טלפון-2:"+object['renters-telephone-two']+' '+
+                    "שכירות:"+object['renters-money']+' '+
+                    "חברת ניהול:"+object['renters-managment-name']+' '+
+                    "מים:"+object['renters-water']+' '+
+                    "חשמל:"+object['renters-elec']+' '+
+                    "עיירה:"+object['renters-Municipality']+' '
+                
+                  }</Alert>
+                )})
+              )):''}
+            {renter.map((item, i)=>{
+                    return(item)
+                  })}
+            
+            </CardBody>
+            <CardFooter>
+              <Button color="primary" onClick={pressAddRenters}>הוסף פינססי</Button>
             </CardFooter>
           </Card>
         </GridItem>
