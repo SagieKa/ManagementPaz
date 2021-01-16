@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect,useContext} from "react";
+import firebase from 'firebase'
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -42,9 +43,7 @@ const switchRoutes = (
 const useStyles = makeStyles(styles);
 
 export default function RTL({ ...rest }) {
-  const [store,setStore]=React.useState({
-    data:['1','2']
-  })
+
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -80,6 +79,23 @@ export default function RTL({ ...rest }) {
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
+    console.log('i am begin')
+    // var assetdB
+    // const assetRef = firebase.database().ref('assets')
+    // assetRef.on('value', (snapshot)=>{
+    // assetdB= snapshot.val()
+    // console.log(assetdB)
+    // console.log('the db in one store:')
+    // console.log(assetdB)
+    
+    // })
+    // setStore(prev=>()=>{
+    //   console.log(prev)
+    //   var newStore= {}
+    //   newStore = {...prev,assets:[4]}
+    //   return newStore
+  
+    // })
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -97,7 +113,7 @@ export default function RTL({ ...rest }) {
     };
   }, [mainPanel]);
   return (
-    <DashData.Provider value={{store,setStore}}>
+    // <DashData.Provider value={{store,setStore}}>
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
@@ -137,6 +153,6 @@ export default function RTL({ ...rest }) {
         /> */}
       </div>
     </div>
-    </DashData.Provider>
+
   );
 }

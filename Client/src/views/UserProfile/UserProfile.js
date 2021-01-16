@@ -18,33 +18,8 @@ import Contants from './contants'
 import Operative from './operative'
 import Financial from './financial'
 import DashData from '../../DashContent'
-
-const assetFormat = {
-  'buy-date':'-',
-  'delivery-date':'-',
-  'project':'-',
-  'bank':'-',
-  'contractor':'-',
-  'entrepreneur':'-',
-  'city':'-',
-  'adress':'-',
-  'building':'-',
-  'floor':'-',
-  'number':'-',
-  'rooms':'-',
-  'size(sqm)':'-',
-  'terrace(sqm)':'-',
-  'storage':'-',
-  'parking':'-',
-  'purchase-price':'-',
-  'current-value':'-',
-  'loans':'-',
-  'flow':'-',
-  // 'check':{
-  //   1:'1',
-  //   2:'2'
-  // }
-}
+import Asset from '../Formats/assetFormat'
+const assetFormat = Asset
 
 const contantFormat = {
   'id':0,

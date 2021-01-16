@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useContext, useEffect} from "react";
+import firebase from 'firebase'
 // @material-ui/core components
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -18,6 +19,9 @@ import Part2Edit from './Part2Edit'
 import Part3Edit from './Part3Edit'
 import Part4Edit from './Part4Edit'
 import Done from './Done'
+import Start from './Start'
+import DashData from '../../DashContent'
+import Contants from "views/UserProfile/contants";
 
 const styles = {
   typo: {
@@ -59,10 +63,23 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function TypographyPage() {
+  const {store,setStore}=useContext(DashData)
+  const [steps,setSteps] = React.useState([ <Part1Edit /> , <Part2Edit id={1}/>, <Part3Edit id={1}/>,<Part4Edit id={1}/>,<Done/> ])
   const classes = useStyles();
   const theme = useTheme();
+  const [numAssets,setNumAssets] = React.useState(0)
   const [activeStep, setActiveStep] = React.useState(0);
-
+  useEffect(()=>{
+    setSteps([
+     <Start lis={lis} age={age} handleChange={handleChange}/>,
+     <Part1Edit nis={store.assets[0]} id={0}/> , 
+     <Part2Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Contant']}/>,
+      <Part3Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Operative']}/>,
+      <Part4Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Financial']}/>,
+      <Done/> ])},[])
+  useEffect(()=>{
+        setNumAssets(store.assets.length)
+  },[])
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -73,29 +90,47 @@ export default function TypographyPage() {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    var changeStore=store.assets[event.target.value-1]
+    var numID=event.target.value-1
+    setAge(event.target.value)
+    setStore(prev=>({
+      ...prev ,
+      numEdit:event.target.value-1,
+  }))
+  setSteps([ <Start/>,
+  <Part1Edit nis={changeStore} id={numID}/> ,
+  <Part2Edit id={numID} nis={changeStore['Contant']}/>,
+  <Part3Edit id={numID} nis={changeStore['Operative']}/>,
+  <Part4Edit id={numID} nis={changeStore['Financial']}/>,
+  <Done/> ])
   };
-  const [steps,setSteps] = React.useState([ <Part1Edit/> , <Part2Edit id={1}/>, <Part3Edit id={1}/>,<Part4Edit id={1}/>,<Done/> ])
+  var lis = [];
+
+for (var i=1; i<=numAssets; i++) {
+    lis.push(<MenuItem value={i}>{i}</MenuItem>);
+}
   return (
     <Card>
       <CardHeader color="primary">
         <h4 className={classes.cardTitleWhite}>עריכת נכס ספציפי</h4>
-        <p className={classes.cardCategoryWhite}>
-          בחר את הנכס הרצוי
-          <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">מספר</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-        </p>
+        {activeStep==0?
+               <p className={classes.cardCategoryWhite}>
+               בחר את הנכס הרצוי
+               <FormControl className={classes.formControl}>
+             {/* <InputLabel id="demo-simple-select-label">מספר</InputLabel> */}
+             <Select
+               labelId="demo-simple-select-label"
+               id="demo-simple-select"
+               value={1}
+               onChange={handleChange}
+             >
+               {lis}
+             </Select>
+           </FormControl>
+             </p>
+        :''}
+
+
       </CardHeader>
       <CardBody>
     {steps[activeStep]}
@@ -103,10 +138,10 @@ export default function TypographyPage() {
       variant="progress"
       steps={6}
       position="static"
-      activeStep={activeStep+1}
+      activeStep={activeStep}
       className={classes.root}
       nextButton={
-        <Button size="small" onClick={handleNext} disabled={activeStep === 4}>
+        <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
           צעד הבא
           {theme.direction === 'rtl' ? <KeyboardArrowRight />:<KeyboardArrowLeft /> }
         </Button>

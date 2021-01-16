@@ -2,17 +2,19 @@ import React from "react";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
+import Button from "components/CustomButtons/Button.js";
 
 export default function Part4Edit(props) {
 
     const id=props.id
     return(
+      props.nis.map((n,i)=>{return(
       <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     // send={handleINCustomInput}
                     labelText="כללי"
-                    id={'financial-general'+id}
+                    id={'financial-general'+i}
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -21,6 +23,7 @@ export default function Part4Edit(props) {
                     }}
                     inputProps={{
                       disabled: false,
+                      defaultValue:n["financial-general"],
                       left:-1
                     }}
                   />
@@ -29,9 +32,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="פירוט"
-                  id={"financial-details"+id}
+                  id={"financial-details"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-details"],
                     }}
                   />
                 </GridItem>
@@ -39,9 +45,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="הודעת תשלום"
-                  id={"financial-message-payment"+id}
+                  id={"financial-message-payment"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-message-payment"],
                     }}
                   />
                 </GridItem>
@@ -49,9 +58,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="תשלום"
-                  id={"financial-payment"+id}
+                  id={"financial-payment"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-payment"],
                     }}
                   />
                 </GridItem>
@@ -60,7 +72,7 @@ export default function Part4Edit(props) {
                   <CustomInput
                     // send={handleINCustomInput}
                     labelText="תאריך"
-                    id={"financial-date"+id}
+                    id={"financial-date"+i}
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -69,7 +81,8 @@ export default function Part4Edit(props) {
                     }}
                     inputProps={{
                       disabled: false,
-                      left:-1
+                      left:-1,
+                      defaultValue:n["financial-date"],
                     }}
                   />
                 </GridItem>
@@ -77,9 +90,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="ערבות בנקאית"
-                  id={"financial-bankait"+id}
+                  id={"financial-bankait"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-bankait"],
                     }}
                   />
                 </GridItem>
@@ -87,9 +103,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="ח.מס\קבלה"
-                  id={"financial-Acceptance"+id}
+                  id={"financial-Acceptance"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-Acceptance"],
                     }}
                   />
                 </GridItem>
@@ -97,9 +116,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="מע''מ"
-                  id={"financial-vat"+id}
+                  id={"financial-vat"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-vat"],
                     }}
                   />
                 </GridItem>
@@ -107,9 +129,12 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="מתווה פיננסי"
-                  id={"financial-financial"+id}
+                  id={"financial-financial"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["financial-financial"],
                     }}
                   />
                 </GridItem>
@@ -117,14 +142,24 @@ export default function Part4Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="הערות רושמים כאן"
-                  id={"financial-remarks"+id}
+                  id={"financial-remarks"+i}
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      defaultValue:n["financial-remarks"],
+                    }}
                   />
                 </GridItem>
-               
+                <Button
+                  fullWidth
+                  color="success"
+                //   onClick={() => showNotification("tl")
+                // }
+                >
+                 עדכן
+                </Button>
               </GridContainer>
-
+    )})
   );
 }

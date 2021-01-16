@@ -2,17 +2,19 @@ import React from "react";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
+import Button from "components/CustomButtons/Button.js";
 
 export default function Part3Edit(props) {
 
     const id=props.id
     return(
+      props.nis.map((n,i)=>{return(
       <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     // send={handleINCustomInput}
                     labelText="כללי"
-                    id={"operative-general"+id}
+                    id={"operative-general"+i}
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -21,7 +23,8 @@ export default function Part3Edit(props) {
                     }}
                     inputProps={{
                       disabled: false,
-                      left:-1
+                      left:-1,
+                      defaultValue:n["operative-general"],
                     }}
                   />
                 </GridItem>
@@ -29,9 +32,12 @@ export default function Part3Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="פירוט"
-                  id={"operative-details"+id}
+                  id={"operative-details"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["operative-details"],
                     }}
                   />
                 </GridItem>
@@ -39,9 +45,12 @@ export default function Part3Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="סטטוס"
-                  id={"operative-status"+id}
+                  id={"operative-status"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["operative-status"],
                     }}
                   />
                 </GridItem>
@@ -49,9 +58,12 @@ export default function Part3Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="תאריך"
-                  id={"operative-date"+id}
+                  id={"operative-date"+i}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:n["operative-date"],
                     }}
                   />
                 </GridItem>
@@ -60,7 +72,7 @@ export default function Part3Edit(props) {
                   <CustomInput
                     // send={handleINCustomInput}
                     labelText="ח.מס\קבלה"
-                    id={"operative-acceptance"+id}
+                    id={"operative-acceptance"+i}
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -69,7 +81,8 @@ export default function Part3Edit(props) {
                     }}
                     inputProps={{
                       disabled: false,
-                      left:-1
+                      left:-1,
+                      defaultValue:n["operative-acceptance"],
                     }}
                   />
                 </GridItem>
@@ -77,14 +90,24 @@ export default function Part3Edit(props) {
                   <CustomInput
                   //  send={handleINCustomInput}
                   labelText="הערות"
-                  id={"operative-remarks"+id}
+                  id={"operative-remarks"+i}
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      defaultValue:n["operative-remarks"],
+                    }}
                   />
                 </GridItem>
-                
+                <Button
+                  fullWidth
+                  color="success"
+                //   onClick={() => showNotification("tl")
+                // }
+                >
+                 עדכן
+                </Button>
               </GridContainer>
-
+ )})
   );
 }
