@@ -80,8 +80,15 @@ export default function Renters1(props){
                     labelText="תאריך התחלה"
                     id={"renters-first-date"+id}
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                    //   MuiInputLabel-shrink
                     }}
+                    inputProps={{
+                        type:'date',
+                        
+                        defaultValue:''
+                      }}
+                      labelProps={{shrink:true}}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -92,6 +99,10 @@ export default function Renters1(props){
                     formControlProps={{
                       fullWidth: true
                     }}
+                    labelProps={{shrink:true}}
+                    inputProps={{
+                        type:'date',
+                      }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>

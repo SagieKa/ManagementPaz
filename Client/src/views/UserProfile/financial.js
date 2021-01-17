@@ -88,6 +88,10 @@ export default function Financial(props){
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'date',
+                    }}
+                    labelProps={{shrink:true}}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>

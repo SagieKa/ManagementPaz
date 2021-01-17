@@ -101,6 +101,7 @@ export default function Part4Edit(props) {
                       }
                     }}
                     inputProps={{
+                      type:'date',
                       disabled: false,
                       left:-1,
                       defaultValue:n["financial-date"],

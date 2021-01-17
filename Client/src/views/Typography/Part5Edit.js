@@ -101,6 +101,7 @@ export default function Part5Edit(props) {
                       }
                     }}
                     inputProps={{
+                        type:'date',
                       disabled: false,
                       left:-1,
                       defaultValue:n["renters-first-date"],
@@ -129,6 +130,7 @@ export default function Part5Edit(props) {
                       fullWidth: true
                     }}
                     inputProps={{
+                        type:'date',
                       defaultValue:n["renters-name-one"],
                     }}
                   />

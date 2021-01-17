@@ -269,11 +269,19 @@ const orderAseets= async()=>{
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
-                        left:'1'
+                        left:'1',
+                        // shrink: true,
                       }
                     }}
+                    labelProps={{shrink:true}}
+                    //   shrink: false,
+                     
+                    // }}
+            
                     inputProps={{
+                      type:'date',
                       disabled: false,
+                      
                       left:-1
                     }}
                   />
@@ -283,8 +291,12 @@ const orderAseets= async()=>{
                    send={handleINCustomInput}
                     labelText="תאריך מסירה"
                     id="delivery-date"
+                    labelProps={{shrink:true}}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      type:'date',
                     }}
                   />
                 </GridItem>

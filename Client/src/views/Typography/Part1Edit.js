@@ -43,7 +43,7 @@ export default function Part1Edit(props) {
                       }
                     }}
                     inputProps={{
-                      // type:'date',
+                      type:'date',
                       defaultValue:props.nis===undefined? '':props.nis["buy-date"],
                       disabled: false,
                       left:-1
@@ -59,6 +59,7 @@ export default function Part1Edit(props) {
                       fullWidth: true
                     }}
                     inputProps={{
+                      type:'date',
                       defaultValue:props.nis===undefined? '':props.nis["delivery-date"]
                     }}
                   />

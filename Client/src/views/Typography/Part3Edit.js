@@ -85,6 +85,7 @@ export default function Part3Edit(props) {
                       fullWidth: true
                     }}
                     inputProps={{
+                      type:'date',
                       defaultValue:n["operative-date"],
                     }}
                   />

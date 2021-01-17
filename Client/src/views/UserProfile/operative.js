@@ -75,8 +75,12 @@ export default function Operative(props){
            send={send}
             labelText="תאריך"
             id={"operative-date"+id}
+            labelProps={{shrink:true}}
             formControlProps={{
               fullWidth: true
+            }}
+            inputProps={{
+              type:'date',
             }}
           />
         </GridItem>
