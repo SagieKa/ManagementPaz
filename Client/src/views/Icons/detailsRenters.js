@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import DashData from '../../DashContent'
 import Asset from '../Formats/rentersHe'
+import { useHistory } from 'react-router-dom';
 
 const styles = {
     header: {
@@ -43,14 +44,17 @@ const styles = {
 
 function DetailsRenters(props){
     const classes = useStyles();
+    const history = useHistory()
     const itemProps =(label,value) => item(label,String(value))
     const {store,setStore}=useContext(DashData)
     const [unit,setUnit]=useState({})
     const [assetFormat,SetAssetFormat]=useState(Asset)
 
     useEffect(() => {
+      var item = history.location.pathname
+      var lastChar = item.substr(item.length - 1);
         console.log(store.assets)
-      var newUnit = store.assets[props.num]
+      var newUnit = store.assets[lastChar]
     try{
         console.log(unit)
         setUnit(newUnit['Renters'])}catch{}

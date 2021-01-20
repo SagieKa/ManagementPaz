@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import DashData from '../../DashContent'
 import Asset from '../Formats/assetHe'
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import { useHistory } from 'react-router-dom';
 
 const styles = {
@@ -68,14 +70,26 @@ function Temp(props){
       setUnit(unit)
       }catch{}
     }, [])
-  return(<Card>
-    <Card.Content>
-      <Card.Header
-       className={classes.header}
-       >פרטים כלליים</Card.Header>
-    </Card.Content>
-    <Card.Content>
-      <Feed>
+  return(
+  
+          <GridContainer>
+
+              {
+              Object.keys(unit).map(function(key, index) {
+                var str = String(unit[key])
+                if(key!='id') return(
+                
+                  <GridItem xs={12} sm={12} md={2}>
+                      {itemProps(assetFormat[key],str)}
+                  </GridItem> 
+                // <Feed.Date  content={itemProps(assetFormat[key],str)}/>
+                
+                )
+              })
+              
+            }
+
+      {/* <Feed>
         <Feed.Event>
 
           <Feed.Content>
@@ -91,9 +105,8 @@ function Temp(props){
           </Feed.Content>
         </Feed.Event>
 
-      </Feed>
-    </Card.Content>
-  </Card>
+      </Feed> */}
+    </GridContainer>
   )
 }
 

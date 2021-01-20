@@ -6,6 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import DashData from '../../DashContent'
 import Asset from '../Formats/financialHe'
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import { useHistory } from 'react-router-dom';
 
 const styles = {
     header: {
@@ -43,6 +46,7 @@ const styles = {
   }
 
 function DetailsFinancial(props){
+  const history = useHistory()
     const classes = useStyles();
     const itemProps =(label,value) => item(label,String(value))
     const {store,setStore}=useContext(DashData)
@@ -50,42 +54,40 @@ function DetailsFinancial(props){
     const [assetFormat,SetAssetFormat]=useState(Asset)
 
     useEffect(() => {
+      var item = history.location.pathname
+      var lastChar = item.substr(item.length - 1);
         console.log(store.assets)
-      var newUnit = store.assets[props.num]
+      var newUnit = store.assets[lastChar]
     try{
         console.log(unit)
         setUnit(newUnit['Financial'])}catch{}
     }, [])
   return(
-  <Card>
-    <Card.Content>
-      <Card.Header
-       className={classes.header}
-       >פרטי פיננסי</Card.Header>
-    </Card.Content>
-    <Card.Content>
-      <Feed>
-        <Feed.Event>
-          <Feed.Content>
+<GridContainer>
             {
             Object.keys(unit).length==0?'':    
             unit.map((o,i)=>{
                 o.id=i+1
              return Object.keys(o).map(function(key, index) {
                 var str = String(o[key])
-                console.log(key)
-                console.log(o[key])
-                if(index==0) return(<Feed.Date content={itemProps(assetFormat['id'],o.id)}/>)
-                else if(key!='id')  return(<Feed.Date content={itemProps(assetFormat[key],str)}/>)
-              
+                console.log(assetFormat[key])
+                if(index==0) return(
+                  <GridItem xs={12} sm={12} md={4}>
+
+                    {itemProps(assetFormat['id'],o.id)}
+                    {itemProps(assetFormat[key],str)}
+                  </GridItem>
+                )
+                if(key!='id') return(
+                  <GridItem xs={12} sm={12} md={2}>
+
+                    {itemProps(assetFormat[key],str)}
+                  </GridItem>
+                  )
               })
             }) 
             }
-          </Feed.Content>
-        </Feed.Event>
-      </Feed>
-    </Card.Content>
-  </Card>
+</GridContainer>
   )
 }
 

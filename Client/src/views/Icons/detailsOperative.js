@@ -1,25 +1,18 @@
 
 
 import React,{useContext,useEffect,useState} from 'react'
-import { Card, Feed } from 'semantic-ui-react'
 import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import DashData from '../../DashContent'
 import Asset from '../Formats/operativeHe'
-
-const styles = {
-    header: {
-
-      fontSize: "24px",
-      marginBottom:'10px'
-    },
-
-  };
-  
-  const useStyles = makeStyles(styles);
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import { useHistory } from 'react-router-dom';
+  ;
   const item =(label,value)=>{
     console.log("here")
       return(
+        <GridItem xs={12} sm={12} md={2}>
         <CustomInput
         labelText={label}
         // id="buy-date"
@@ -36,57 +29,48 @@ const styles = {
           disabled: true,
           defaultValue:value
         }}
-      />
+      /></GridItem>
 
       )
 
   }
 
 function DetailsOperative(props){
-    const classes = useStyles();
+  const history = useHistory()
     const itemProps =(label,value) => item(label,String(value))
     const {store,setStore}=useContext(DashData)
     const [unit,setUnit]=useState({})
     const [assetFormat,SetAssetFormat]=useState(Asset)
 
     useEffect(() => {
+      var item = history.location.pathname
+      var lastChar = item.substr(item.length - 1);
         console.log(store.assets)
-      var newUnit = store.assets[props.num]
+      var newUnit = store.assets[lastChar]
     try{
         console.log(unit)
         setUnit(newUnit['Operative'])}catch{}
     }, [])
-  return(
-  <Card>
-    <Card.Content>
-      <Card.Header
-       className={classes.header}
-       >פרטי תפעולי</Card.Header>
-    </Card.Content>
-    <Card.Content>
-      <Feed>
-        <Feed.Event>
+    return(
+      
 
-          <Feed.Content>
-            {
-            Object.keys(unit).length==0?'':    
-            unit.map((o,i)=>{
-                o.id=i+1
-             return Object.keys(o).map(function(key, index) {
-                var str = String(o[key])
-                console.log(assetFormat[key])
-                if(index==0) return(<Feed.Date content={itemProps(assetFormat['id'],o.id)}/>)
-                else if(key!='id')  return(<Feed.Date content={itemProps(assetFormat[key],str)}/>)
-              })
-            }) 
-            }
-          </Feed.Content>
-        </Feed.Event>
+                  
+                  Object.keys(unit).length==0?'':    
+                  unit.map((o,i)=>{
+                      o.id=i+1
+                   return(   <GridContainer > {Object.keys(o).map(function(key, index) {
+                      var str = String(o[key])
+                      console.log(assetFormat[key])
+                       return(
+                      
+                          itemProps(assetFormat[key],str)
+                         
+                        )
+                    })} </GridContainer> )
+                  }) 
+                  
 
-      </Feed>
-    </Card.Content>
-  </Card>
-  )
-}
+        )
+      }
 
 export default DetailsOperative
