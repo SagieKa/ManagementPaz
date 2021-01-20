@@ -35,12 +35,13 @@ const customInputStyle = {
   labelRoot: {
 
     ...defaultFont,
-    color: grayColor[3] + " !important",
+    color: grayColor[1] + " !important",
     fontWeight: "400",
-    fontSize: "14px",
+    fontSize: "16px",
     lineHeight: "1.42857",
     letterSpacing: "unset",
-    right:0
+    right:1,
+    left:'none'
 
     
   },
@@ -67,6 +68,7 @@ const customInputStyle = {
   formControl: {
     paddingBottom: "10px",
     margin: "27px 0 0 0",
+   
     position: "relative",
     verticalAlign: "unset",
     "& .MuiInputLabel-formControl": {

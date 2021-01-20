@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React,{useContext} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
@@ -9,16 +9,55 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
+import DashData from '../../DashContent'
 import styles from "assets/jss/material-dashboard-react/views/iconsStyle.js";
-
+import Temp from './details'
+import DetailsContant from './detailsContant'
+import DetailsOperative from './detailsOperative'
+import DetailsFinancial from './detailsFinancial'
 const useStyles = makeStyles(styles);
 
 export default function Icons() {
   const classes = useStyles();
+  const {store,setStore}=useContext(DashData)
   return (
     <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
+      <GridItem xs={12} sm={12} md={1}/>
+      <GridItem xs={12} sm={12} md={2}>
+      <Temp num={0}/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <DetailsContant num={0}/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <DetailsOperative num={0}/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <DetailsFinancial num={0}/>
+      </GridItem>
+      {/* <GridItem xs={12} sm={12} md={2}>
+      <Temp/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <Temp/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <Temp/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={2}>
+      <Temp/>
+      </GridItem> */}
+      <GridItem xs={12} sm={12} md={1}/>
+      {/* <GridItem xs={12} sm={12} md={3}>
+      <Temp/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={3}>
+      <Temp/>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={3}>
+      <Temp/>
+      </GridItem> */}
+      {/* <GridItem xs={12} sm={12} md={12}>
         <Card plain>
           <CardHeader plain color="primary">
             <h4 className={classes.cardTitleWhite}>Material Design Icons</h4>
@@ -59,7 +98,7 @@ export default function Icons() {
             </Hidden>
           </CardBody>
         </Card>
-      </GridItem>
+      </GridItem> */}
     </GridContainer>
   );
 }

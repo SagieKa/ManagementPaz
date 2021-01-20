@@ -9,6 +9,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import firebase from '../../utils/firebase'
+import TableMaterial from './MaterialTable'
 
 const styles = {
   cardCategoryWhite: {
@@ -108,6 +109,21 @@ export default function TableList() {
   },[])
   return (
     <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+              <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>טבלה מספר אחת</h4>
+            <p className={classes.cardCategoryWhite}>
+             טבלה תיאור הנכסים
+            </p>
+          </CardHeader>
+          <CardBody>
+
+        <TableMaterial/>
+          </CardBody>
+          </Card>
+          
+      </GridItem>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
@@ -173,6 +189,7 @@ export default function TableList() {
           </CardBody>
         </Card>
       </GridItem>
+
     </GridContainer>
   );
 }
