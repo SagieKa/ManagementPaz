@@ -16,6 +16,7 @@ import Temp from './details'
 import DetailsContant from './detailsContant'
 import DetailsOperative from './detailsOperative'
 import DetailsFinancial from './detailsFinancial'
+import DetailsRenters from './detailsRenters'
 
 
 const useStyles = makeStyles(styles);
@@ -77,11 +78,11 @@ export default function Icons() {
       <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="success">
-              <h4 className={classes.cardTitleWhite}>פיננסי</h4>
+              <h4 className={classes.cardTitleWhite}>שוכרים</h4>
             </CardHeader>
             <CardBody className={classes.right}>
         
-      <DetailsFinancial num={9}/>
+      <DetailsRenters num={9}/>
      
       </CardBody>
       </Card>

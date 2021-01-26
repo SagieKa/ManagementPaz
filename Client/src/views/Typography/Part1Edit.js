@@ -3,15 +3,14 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import firebase from 'firebase'
-import DashData from '../../DashContent'
-import Asset from '../Formats/assetFormat'
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Button from "components/CustomButtons/Button.js";
 
+
+
 export default function Part1Edit(props) {
-  // const {store,setStore}=useContext(DashData)
-  // const [object,setObject]=useState(Asset)
-  
-  // const [edit,setEdit]=React.useState(props.num)
   const [asset , setAsset] = useState({})
   console.log(props.nis)
   const handleINCustomInput= (type,value)=>{
@@ -30,6 +29,12 @@ export default function Part1Edit(props) {
 
     return(
       <GridContainer>
+      <Card>
+      <CardHeader color="rose">
+        <h4 >פרטים כלליים</h4>
+      </CardHeader>
+      
+      </Card>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     send={handleINCustomInput}
@@ -59,7 +64,7 @@ export default function Part1Edit(props) {
                       fullWidth: true
                     }}
                     inputProps={{
-                      type:'date',
+                      
                       defaultValue:props.nis===undefined? '':props.nis["delivery-date"]
                     }}
                   />

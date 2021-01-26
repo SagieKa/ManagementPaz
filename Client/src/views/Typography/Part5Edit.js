@@ -130,7 +130,7 @@ export default function Part5Edit(props) {
                       fullWidth: true
                     }}
                     inputProps={{
-                        type:'date',
+                        
                       defaultValue:n["renters-name-one"],
                     }}
                   />
@@ -159,6 +159,7 @@ export default function Part5Edit(props) {
                     inputProps={{
                       defaultValue:n["renters-name-two"],
                     }}
+          
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
@@ -178,12 +179,13 @@ export default function Part5Edit(props) {
                   <CustomInput
                    send={handleINCustomInput}
                    labelText="שכירות"
-                  id={"renters-money"+i}
+                    id={"renters-money"+i}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       defaultValue:n["renters-money"],
+                      // type:'number',
                     }}
                   />
                 </GridItem>

@@ -19,4 +19,6 @@ export default {
             'current-value':'-',
             'loans':'-',
             'flow':'-',
+            'x':'-',
+            'y':'-',
         }

@@ -154,6 +154,12 @@ export default function Renters1(props){
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>

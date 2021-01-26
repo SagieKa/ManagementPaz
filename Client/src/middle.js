@@ -17,17 +17,42 @@ export default function Middlew() {
     const [store,setStore]=React.useState({
         assets:[] , 
         numEdit:4,
+        countLength:0,
+        sumOfAssets:0
     
       })
-    
+    const getLength =(assets)=>{
+      let length
+      try {
+        length=assets.length
+      } catch (error) {
+        length=0
+      }
+      return length
+
+    }
+    const generalClaculte =(assets)=>{
+      var currentValue=0
+      assets.map((o,i)=>{
+        currentValue+=o['current-value']
+      })
+      setStore(prev=>({
+        ...prev ,
+        sumOfAssets:currentValue
+    }))
+
+    }
       useEffect(() => {
     var assetdB
     const assetRef = firebase.database().ref('assets')
     assetRef.on('value', (snapshot)=>{
     assetdB= snapshot.val()
+    var length=getLength(assetdB)
+    generalClaculte(assetdB)
     setStore(prev=>({
         ...prev ,
-        assets:assetdB
+        assets:assetdB,
+        countLength:length
     }))
     })
     

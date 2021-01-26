@@ -8,6 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomSelect from "components/CustomInput/CustomSelect";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -18,6 +19,11 @@ import Contants from './contants'
 import Operative from './operative'
 import Financial from './financial'
 import Renters  from './Renters'
+
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import DashData from '../../DashContent'
 import Asset from '../Formats/assetFormat'
 const assetFormat = Asset
@@ -108,6 +114,7 @@ export default function UserProfile() {
   const [renters,setRenters]= useState([])
   
   const handleINCustomInput= (type,value)=>{
+    console.log(type+': ' +value)
     const regexContant = new RegExp('contants')
     const regexOperative = new RegExp('operative')
     const regexFinancial= new RegExp('financial')
@@ -265,7 +272,7 @@ const orderAseets= async()=>{
                     labelText="תאריך קניה"
                     id="buy-date"
                     inputProps
-                
+
                     formControlProps={{
                       fullWidth: true ,
                       "& .MuiInputLabel-formControl": {
@@ -286,7 +293,7 @@ const orderAseets= async()=>{
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                {/* <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                    send={handleINCustomInput}
                     labelText="תאריך מסירה"
@@ -298,6 +305,19 @@ const orderAseets= async()=>{
                     inputProps={{
                       type:'date',
                     }}
+                  />
+                </GridItem> */}
+                <GridItem xs={12} sm={12} md={3}>
+                <CustomSelect
+                   send={handleINCustomInput}
+                    data={['בניה','מושכר','לא מושכר','נמכר']}
+                    labelText="תאריך מסירה"
+                    id="delivery-date"
+                    labelProps={{shrink:true}}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+            
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -452,6 +472,12 @@ const orderAseets= async()=>{
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -461,6 +487,12 @@ const orderAseets= async()=>{
                     id="current-value"
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
                     }}
                   />
                 </GridItem>
@@ -472,6 +504,12 @@ const orderAseets= async()=>{
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -482,27 +520,37 @@ const orderAseets= async()=>{
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                    labelText="אורך"
+                    id="x"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                    labelText="רוחב"
+                    id="y"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
                   />
                 </GridItem>
 
               </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
-                  send={handleINCustomInput}
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+
             </CardBody>
             <CardFooter>
               <Button color="primary" onClick={pushAseetsToDb}>הוסף נכס</Button>

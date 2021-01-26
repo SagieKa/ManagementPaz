@@ -78,6 +78,12 @@ export default function Financial(props){
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
@@ -121,6 +127,12 @@ export default function Financial(props){
                     id={"financial-vat"+id}
                     formControlProps={{
                       fullWidth: true
+                    }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
                     }}
                   />
                 </GridItem>

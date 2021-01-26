@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React,{useContext, useEffect}  from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -17,6 +17,7 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+import DashData from '../../DashContent'
 // core components
 import Button from "components/CustomButtons/Button.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -32,6 +33,15 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SnackbarContent from "components/Snackbar/SnackbarContent.js";
+import {
+  primaryColor,
+  whiteColor,
+  primaryBoxShadow,
+  defaultFont,
+  blackColor,
+  grayColor,
+  hexToRgb
+} from "assets/jss/material-dashboard-react.js";
 
 import {
   dailySalesChart,
@@ -63,6 +73,7 @@ const useStyles = makeStyles(styles);
 
 export default function RTLPage() {
   const classes = useStyles();
+  const {store,setStore}=useContext(DashData)
   return (
     <div>
       <GridContainer>
@@ -72,9 +83,9 @@ export default function RTLPage() {
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>שימוש במקום</p>
+              <p className={classes.cardCategory}>כמות נכסים</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
+                {store.countLength} <small></small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -95,7 +106,7 @@ export default function RTLPage() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>סכום</p>
+              <p className={classes.cardCategory}>נכסים מושכרים</p>
               <h3 className={classes.cardTitle}>$34,245</h3>
             </CardHeader>
             <CardFooter stats>
@@ -112,7 +123,7 @@ export default function RTLPage() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>עיגול סכום</p>
+              <p className={classes.cardCategory}>נכנסים בבניה</p>
               <h3 className={classes.cardTitle}>75</h3>
             </CardHeader>
             <CardFooter stats>
@@ -129,13 +140,165 @@ export default function RTLPage() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>עוקבים</p>
+              <p className={classes.cardCategory}>נכנסים שנמכרו</p>
               <h3 className={classes.cardTitle}>+245</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
                 <Update />
-                רק עודכן
+                Just Updated
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="rose" stats icon>
+              <CardIcon color="rose">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>עלות הנכסים</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small></small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                 קבל יותר מקום
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <Store />
+              </CardIcon>
+              <p className={classes.cardCategory}> שווי נכסים קיימים</p>
+              <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                ב24 שעות
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <Icon>info_outline</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>שווי נכסים שנמכרו</p>
+              <h3 className={classes.cardTitle}>75</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <LocalOffer />
+             תביא מGITHUB
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
+                <Accessibility />
+              </CardIcon>
+              <p className={classes.cardCategory}>סך הלוואות</p>
+              <h3 className={classes.cardTitle}>+245</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Update />
+                Just Updated
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>סך ביטוחים חודשי</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small></small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                 קבל יותר מקום
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="success" stats icon>
+              <CardIcon color="success">
+                <Store />
+              </CardIcon>
+              <p className={classes.cardCategory}>סך שכירויות חודשי</p>
+              <h3 className={classes.cardTitle}>$34,245</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                ב24 שעות
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
+                <Icon>info_outline</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>  תזרים חודשי</p>
+              <h3 className={classes.cardTitle}>75</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <LocalOffer />
+             תביא מGITHUB
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
+                <Accessibility />
+              </CardIcon>
+              <p className={classes.cardCategory}>תזרים חודשי מהוון</p>
+              <h3 className={classes.cardTitle}>+245</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Update />
+                Just Updated
               </div>
             </CardFooter>
           </Card>
@@ -204,8 +367,8 @@ export default function RTLPage() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Cמשהו לרשום</h4>
+              <p className={classes.cardCategory}>משהו קצת יותר ארוך לרשום</p>
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
