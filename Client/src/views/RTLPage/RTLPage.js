@@ -141,7 +141,7 @@ export default function RTLPage() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>נכנסים שנמכרו</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>75</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -161,7 +161,7 @@ export default function RTLPage() {
               </CardIcon>
               <p className={classes.cardCategory}>עלות הנכסים</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small></small>
+              {store.purchasePrice}
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -200,7 +200,7 @@ export default function RTLPage() {
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים שנמכרו</p>
-              <h3 className={classes.cardTitle}>75</h3>
+              <h3 className={classes.cardTitle}>----</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -217,7 +217,7 @@ export default function RTLPage() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>סך הלוואות</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>{store.loans}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -237,7 +237,7 @@ export default function RTLPage() {
               </CardIcon>
               <p className={classes.cardCategory}>סך ביטוחים חודשי</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small></small>
+               ----<small></small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -259,7 +259,7 @@ export default function RTLPage() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>סך שכירויות חודשי</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>{store.renterPrice}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -276,7 +276,7 @@ export default function RTLPage() {
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>  תזרים חודשי</p>
-              <h3 className={classes.cardTitle}>75</h3>
+              <h3 className={classes.cardTitle}>{store.flow}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -293,7 +293,7 @@ export default function RTLPage() {
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>תזרים חודשי מהוון</p>
-              <h3 className={classes.cardTitle}>+245</h3>
+              <h3 className={classes.cardTitle}>-----</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

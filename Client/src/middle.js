@@ -18,7 +18,11 @@ export default function Middlew() {
         assets:[] , 
         numEdit:4,
         countLength:0,
-        sumOfAssets:0
+        sumOfAssets:0,
+        purchasePrice:0,
+        loans:0,
+        flow:0,
+        renterPrice:0
     
       })
     const getLength =(assets)=>{
@@ -33,12 +37,28 @@ export default function Middlew() {
     }
     const generalClaculte =(assets)=>{
       var currentValue=0
+      var purchasePrice=0
+      let loans=0
+      let flow=0
+      let renterPrice=0
       assets.map((o,i)=>{
+       
         currentValue+=o['current-value']
+        purchasePrice+=o['purchase-price']
+        loans+=o['loans']
+        flow+=o['flow']
+        renterPrice+=o['Renter']['0']['renters-money']
+      
+        
       })
+
       setStore(prev=>({
         ...prev ,
-        sumOfAssets:currentValue
+        sumOfAssets:currentValue,
+        purchasePrice,
+        loans,
+        flow,
+        renterPrice
     }))
 
     }

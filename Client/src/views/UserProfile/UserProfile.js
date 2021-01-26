@@ -136,6 +136,7 @@ export default function UserProfile() {
     console.log(type + ' '+ value)
     const object ={}
     object[type]=value
+    if(type=='current-value' ||type=='purchase-price' ||type=='flow'||type=='loans') object[type]=parseInt(value)
     setAsset({
       ...asset,
       ...object})
@@ -159,6 +160,7 @@ export default function UserProfile() {
     var newType = type.replace(num,'')
     const object ={}
     object[newType]=value
+    if(newType=='financial-payment' || newType=='financial-vat') object[newType]=parseInt(value)
     setFinancialObject(prev=>({...prev,id:num,...object}))
     }
   
@@ -167,6 +169,7 @@ export default function UserProfile() {
     var newType = type.replace(num,'')
     const object ={}
     object[newType]=value
+    if(newType =='renters-money') object[newType]=parseInt(value)
     setRenterObject(prev=>({...prev,id:num,...object}))
     }
   
