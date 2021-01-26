@@ -15,6 +15,7 @@ export default function Part5Edit(props) {
     var newType = type.replace(num,'')
     const object ={}
     object[newType]=value
+    if(newType =='renters-money'||newType =='renters-moneys') object[newType]=parseInt(value)
     setAsset(prev=>{
         var newOne=prev
         newOne[num]={...newOne[num],...object}

@@ -16,6 +16,7 @@ export default function Part1Edit(props) {
   const handleINCustomInput= (type,value)=>{
     const object ={}
     object[type]=value
+    if(type=='current-value' ||type=='purchase-price' ||type=='flow'||type=='loans'||type=='insurance') object[type]=parseInt(value)
     setAsset({
       ...asset,
       ...object})
@@ -307,6 +308,25 @@ export default function Part1Edit(props) {
                       disabled: false,
                       left:-1,
                       defaultValue:props.nis===undefined? '':props.nis["current-value"]
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    send={handleINCustomInput}
+                    labelText="עלות ביטוח"
+                    id="insurance"
+                    formControlProps={{
+                      fullWidth: true ,
+                      "& .MuiInputLabel-formControl": {
+                        left:'1'
+                      }
+                    }}
+              
+                    inputProps={{
+                      disabled: false,
+                      left:-1,
+                      defaultValue:props.nis===undefined? '':props.nis["insurance"]
                     }}
                   />
                 </GridItem>

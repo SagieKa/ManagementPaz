@@ -22,7 +22,9 @@ export default function Middlew() {
         purchasePrice:0,
         loans:0,
         flow:0,
-        renterPrice:0
+        renterPrice:0,
+        priceOfSale:0,
+        insurance:0
     
       })
     const getLength =(assets)=>{
@@ -41,13 +43,16 @@ export default function Middlew() {
       let loans=0
       let flow=0
       let renterPrice=0
+      let priceOfSale=0
+      let insurance=0
       assets.map((o,i)=>{
-       
+       if(o['delivery-date']==="נמכר") priceOfSale+=o['current-value']
         currentValue+=o['current-value']
         purchasePrice+=o['purchase-price']
         loans+=o['loans']
         flow+=o['flow']
         renterPrice+=o['Renter']['0']['renters-money']
+        insurance+=o['insurance']
       
         
       })
@@ -58,7 +63,9 @@ export default function Middlew() {
         purchasePrice,
         loans,
         flow,
-        renterPrice
+        renterPrice,
+        priceOfSale,
+        insurance
     }))
 
     }

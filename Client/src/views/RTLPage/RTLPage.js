@@ -77,7 +77,7 @@ export default function RTLPage() {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -100,7 +100,47 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="rose" stats icon>
+              <CardIcon color="rose">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>עלות הנכסים</p>
+              <h3 className={classes.cardTitle}>
+              {store.purchasePrice}
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                 קבל יותר מקום
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <Store />
+              </CardIcon>
+              <p className={classes.cardCategory}> שווי נכסים קיימים</p>
+              <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                ב24 שעות
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        {/* <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -150,57 +190,18 @@ export default function RTLPage() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="rose" stats icon>
-              <CardIcon color="rose">
-                <Icon>content_copy</Icon>
-              </CardIcon>
-              <p className={classes.cardCategory}>עלות הנכסים</p>
-              <h3 className={classes.cardTitle}>
-              {store.purchasePrice}
-              </h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <Danger>
-                  <Warning />
-                </Danger>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                 קבל יותר מקום
-                </a>
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="primary" stats icon>
-              <CardIcon color="primary">
-                <Store />
-              </CardIcon>
-              <p className={classes.cardCategory}> שווי נכסים קיימים</p>
-              <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <DateRange />
-                ב24 שעות
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים שנמכרו</p>
-              <h3 className={classes.cardTitle}>----</h3>
+              <h3 className={classes.cardTitle}>{store.priceOfSale}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -210,7 +211,7 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -227,9 +228,7 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -237,7 +236,7 @@ export default function RTLPage() {
               </CardIcon>
               <p className={classes.cardCategory}>סך ביטוחים חודשי</p>
               <h3 className={classes.cardTitle}>
-               ----<small></small>
+              {store.insurance}<small></small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -252,7 +251,10 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+      </GridContainer>
+      <GridContainer>
+
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -269,7 +271,7 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -286,7 +288,7 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">

@@ -136,7 +136,7 @@ export default function UserProfile() {
     console.log(type + ' '+ value)
     const object ={}
     object[type]=value
-    if(type=='current-value' ||type=='purchase-price' ||type=='flow'||type=='loans') object[type]=parseInt(value)
+    if(type=='current-value' ||type=='purchase-price' ||type=='flow'||type=='loans'||type=='insurance') object[type]=parseInt(value)
     setAsset({
       ...asset,
       ...object})
@@ -488,6 +488,22 @@ const orderAseets= async()=>{
                   send={handleINCustomInput}
                     labelText="שווי נוכחי"
                     id="current-value"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      type:'number',
+                      disabled: false,
+                      
+                      left:-1
+                    }}
+                  />
+                    </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                    labelText="עלות ביטוח"
+                    id="insurance"
                     formControlProps={{
                       fullWidth: true
                     }}
