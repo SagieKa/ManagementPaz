@@ -130,6 +130,7 @@ const emailsSubscriptionChart = {
   }
 };
 
+
 // ##############################
 // // // Completed Tasks
 // #############################
@@ -186,5 +187,6 @@ const completedTasksChart = {
 module.exports = {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
+ 
 };

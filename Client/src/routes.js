@@ -38,8 +38,8 @@ import RTLPage from "views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
-    path: "/rtl-page",
-    name: "RTL Support",
+    path: "/index",
+    name: "index",
     rtlName: "דף מידע",
     icon: Language,
     component: RTLPage,
@@ -54,25 +54,25 @@ const dashboardRoutes = [
     layout: "/rtl"
   },
   {
-    path: "/user",
-    name: "User Profile",
+    path: "/AddAsset",
+    name: "AddAsset",
     rtlName: "הוספת נכס",
     icon: Person,
     component: UserProfile,
     layout: "/rtl"
   },
   {
-    path: "/typography",
-    name: "Typography",
+    path: "/EditAsset",
+    name: "EditAsset",
     rtlName: "עריכת נכס",
     icon: LibraryBooks,
     component: Typography,
     layout: "/rtl"
   },
   {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "אייקונים",
+    path: "/asset",
+    name: "Asset",
+    rtlName: "הצגת נכס",
     icon: BubbleChart,
     component: Icons,
     layout: "/rtl"

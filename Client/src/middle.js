@@ -24,7 +24,11 @@ export default function Middlew() {
         flow:0,
         renterPrice:0,
         priceOfSale:0,
-        insurance:0
+        insurance:0,
+        statusBuild:0,
+        statusRent:0,
+        statusNoRent:0,
+        statusSale:0,
     
       })
     const getLength =(assets)=>{
@@ -45,8 +49,18 @@ export default function Middlew() {
       let renterPrice=0
       let priceOfSale=0
       let insurance=0
+      let statusBuild=0
+      let statusRent=0
+      let statusNoRent=0
+      let statusSale=0
       assets.map((o,i)=>{
-       if(o['delivery-date']==="נמכר") priceOfSale+=o['current-value']
+       if(o['delivery-date']==="נמכר"){
+       priceOfSale+=o['current-value']
+       statusSale+=1
+      }
+      if(o['delivery-date']==="בניה") statusBuild+=1
+      if(o['delivery-date']==="מושכר") statusRent+=1
+      if(o['delivery-date']==="לא מושכר") statusNoRent+=1
         currentValue+=o['current-value']
         purchasePrice+=o['purchase-price']
         loans+=o['loans']
@@ -65,7 +79,11 @@ export default function Middlew() {
         flow,
         renterPrice,
         priceOfSale,
-        insurance
+        insurance,
+        statusBuild,
+        statusRent,
+        statusNoRent,
+        statusSale
     }))
 
     }
@@ -91,7 +109,7 @@ export default function Middlew() {
         <Switch>
           <Route path="/admin" component={Admin} />
           <Route path="/rtl" component={RTL} />
-          <Redirect from="/" to="/admin/dashboard" />
+          <Redirect from="/" to="/rtl/index" />
         </Switch>
       </DashData.Provider>
       </Router>

@@ -4,7 +4,9 @@ import React,{useContext, useEffect}  from "react";
 import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
+
 import Icon from "@material-ui/core/Icon";
+import MyResponsivePie from 'variables/chartVia'
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
 import Warning from "@material-ui/icons/Warning";
@@ -14,9 +16,9 @@ import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import TodayIcon from '@material-ui/icons/Today';
 import DashData from '../../DashContent'
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -46,24 +48,25 @@ import {
 import {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
+
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/rtlStyle.js";
 
 import avatar from "assets/img/faces/marc.jpg";
 
-let bugs = [
+let threeMount = [
   "طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن؟",
   "	نخست از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند؟",
   "همان حال کار آنها به نوعی وابسته به متن می‌باشد",
   "	آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند"
 ];
-let website = [
+let mount = [
   "بعد از اینکه متن در آن قرار گیرد چگونه به نظر می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته",
   "اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید؟"
 ];
-let server = [
+let week = [
   "گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی؟",
   "از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی ؟",
   "از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند؟"
@@ -72,8 +75,35 @@ let server = [
 const useStyles = makeStyles(styles);
 
 export default function RTLPage() {
+  
   const classes = useStyles();
   const {store,setStore}=useContext(DashData)
+  const viaData =[
+    {
+      "id": "נמכר",
+      "label": "נמכר",
+      "value":  store.statusSale,
+      "color": "#fb9a99"
+    },
+    {
+      "id": "לא מושכר",
+      "label": "לא מושכר",
+      "value": store.statusNoRent,
+      "color": "hsl(80, 70%, 50%)" 
+    },
+    {
+      "id":  "מושכר",
+      "label": "מושכר",
+      "value": store.statusRent,
+      "color": "hsl(295, 70%, 50%)"
+    },
+    {
+      "id": "בבניה",
+      "label": "בבניה",
+      "value": store.statusBuild,
+      "color":"hsl(276, 70%, 50%)"
+    },
+  ]
   return (
     <div>
       <GridContainer>
@@ -129,7 +159,7 @@ export default function RTLPage() {
               <CardIcon color="primary">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}> שווי נכסים קיימים</p>
+              <p className={classes.cardCategory}>שווי נכסים קיימים</p>
               <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
             </CardHeader>
             <CardFooter stats>
@@ -140,57 +170,6 @@ export default function RTLPage() {
             </CardFooter>
           </Card>
         </GridItem>
-        {/* <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="success" stats icon>
-              <CardIcon color="success">
-                <Store />
-              </CardIcon>
-              <p className={classes.cardCategory}>נכסים מושכרים</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <DateRange />
-                ב24 שעות
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="danger" stats icon>
-              <CardIcon color="danger">
-                <Icon>info_outline</Icon>
-              </CardIcon>
-              <p className={classes.cardCategory}>נכנסים בבניה</p>
-              <h3 className={classes.cardTitle}>75</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <LocalOffer />
-             תביא מGITHUB
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader color="info" stats icon>
-              <CardIcon color="info">
-                <Accessibility />
-              </CardIcon>
-              <p className={classes.cardCategory}>נכנסים שנמכרו</p>
-              <h3 className={classes.cardTitle}>75</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <Update />
-                Just Updated
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem> */}
       </GridContainer>
       <GridContainer>
 
@@ -277,7 +256,7 @@ export default function RTLPage() {
               <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>  תזרים חודשי</p>
+              <p className={classes.cardCategory}>תזרים חודשי</p>
               <h3 className={classes.cardTitle}>{store.flow}</h3>
             </CardHeader>
             <CardFooter stats>
@@ -307,118 +286,68 @@ export default function RTLPage() {
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card chart>
-            <CardHeader color="success">
-              <ChartistGraph
-                className="ct-chart"
-                data={dailySalesChart.data}
-                type="Line"
-                options={dailySalesChart.options}
-                listener={dailySalesChart.animation}
-              />
+            <CardHeader color="warning">סטטוס נכסים
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>מכירות יומי </h4>
+               <MyResponsivePie data={viaData}/>
+              {/* <h4 className={classes.cardTitle}>סטטוס נכסים</h4>
               <p className={classes.cardCategory}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> 55%
                 </span>{" "}
                עליה במכירות היומי
-              </p>
+              </p> */}
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> מעודכן ב4 דקות
+                <AccessTime />במידה ואחת הרשומות יהיה 0 הוא לא יוצג
               </div>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="warning">
-              <ChartistGraph
-                className="ct-chart"
-                data={emailsSubscriptionChart.data}
-                type="Bar"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>נתוני הדואר </h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> מעודכן ב3 דקות
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="danger">
-              <ChartistGraph
-                className="ct-chart"
-                data={completedTasksChart.data}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Cמשהו לרשום</h4>
-              <p className={classes.cardCategory}>משהו קצת יותר ארוך לרשום</p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime />מעודכן ב2 דקות
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
+      
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
-            title="وظایف:"
+            title="התראת תשלומים:"
             headerColor="primary"
             rtlActive
             tabs={[
               {
-                tabName: "باگ‌ها",
-                tabIcon: BugReport,
+                tabName: "3 חודשים",
+                tabIcon: DateRangeIcon,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0, 3]}
                     tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
+                    tasks={threeMount}
                     rtlActive
                   />
                 )
               },
               {
-                tabName: "وبسایت",
-                tabIcon: Code,
+                tabName: "חודש",
+                tabIcon: TodayIcon,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0]}
                     tasksIndexes={[0, 1]}
-                    tasks={website}
+                    tasks={mount}
                     rtlActive
                   />
                 )
               },
               {
-                tabName: "سرور",
-                tabIcon: Cloud,
+                tabName: "שבוע",
+                tabIcon: CalendarTodayIcon,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[1]}
                     tasksIndexes={[0, 1, 2]}
-                    tasks={server}
+                    tasks={week}
                     rtlActive
                   />
                 )
@@ -426,7 +355,7 @@ export default function RTLPage() {
             ]}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="warning">
               <h4 className={classes.cardTitleWhite}>آمار کارکنان</h4>

@@ -15,7 +15,7 @@ export default function Footer(props) {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
-        <div className={classes.left}>
+        {/* <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="#home" className={classes.block}>
@@ -38,18 +38,18 @@ export default function Footer(props) {
               </a>
             </ListItem>
           </List>
-        </div>
+        </div> */}
         <p className={classes.right}>
           <span>
             &copy; {1900 + new Date().getYear()}{" "}
             <a
-              href="https://www.creative-tim.com?ref=mdr-footer"
+              href="https://console.firebase.google.com/project/dashbord-tanzman/database/dashbord-tanzman-default-rtdb/data"
               target="_blank"
               className={classes.a}
             >
               Tanzman-Family
             </a>
-            , made with love for a better web
+            , made with love @Copyright SagieKarta
           </span>
         </p>
       </div>
