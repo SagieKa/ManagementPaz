@@ -2,6 +2,7 @@ import React ,{useEffect} from "react";
 import firebase from 'firebase'
 import DashData from './DashContent'
 import ReactDOM from "react-dom";
+import moment from 'moment'
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
@@ -14,6 +15,10 @@ const hist = createBrowserHistory();
 
 
 export default function Middlew() {
+    var m = moment("2021-03-01"); 
+    var today = moment().startOf('day');
+    //we work with - --> if is week ites 7 if mount -30 3 mount -90
+    console.log(Math.round(moment.duration(today - m).asDays()))
     const [store,setStore]=React.useState({
         assets:[] , 
         numEdit:4,

@@ -1,5 +1,7 @@
 /*eslint-disable*/
 import React,{useContext, useEffect}  from "react";
+// import Moment from 'react-moment';
+import moment from 'moment'
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -20,7 +22,12 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import TodayIcon from '@material-ui/icons/Today';
 import DashData from '../../DashContent'
+import HomeIcon from '@material-ui/icons/Home';
+import PaymentIcon from '@material-ui/icons/Payment';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 // core components
+import MergeTypeIcon from '@material-ui/icons/MergeType';
 import Button from "components/CustomButtons/Button.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -104,6 +111,8 @@ export default function RTLPage() {
       "color":"hsl(276, 70%, 50%)"
     },
   ]
+  var m = moment("2021-03-01"); 
+var today = moment().startOf('day');
   return (
     <div>
       <GridContainer>
@@ -111,7 +120,7 @@ export default function RTLPage() {
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <Icon>content_copy</Icon>
+              <HomeIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>כמות נכסים</p>
               <h3 className={classes.cardTitle}>
@@ -124,7 +133,8 @@ export default function RTLPage() {
                   <Warning />
                 </Danger>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
-                 קבל יותר מקום
+                 קבל יותר מקום {moment('20211031').startOf('day').fromNow()}
+                 קבל יותר מקום {console.log(Math.round(moment.duration(today - m).asDays()))}
                 </a>
               </div>
             </CardFooter>
@@ -134,7 +144,7 @@ export default function RTLPage() {
           <Card>
             <CardHeader color="rose" stats icon>
               <CardIcon color="rose">
-                <Icon>content_copy</Icon>
+                <PaymentIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>עלות הנכסים</p>
               <h3 className={classes.cardTitle}>
@@ -157,7 +167,7 @@ export default function RTLPage() {
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
-                <Store />
+                <AccountBalanceIcon />
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים קיימים</p>
               <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
@@ -177,7 +187,7 @@ export default function RTLPage() {
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
-                <Icon>info_outline</Icon>
+                <AccountBalanceWalletIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים שנמכרו</p>
               <h3 className={classes.cardTitle}>{store.priceOfSale}</h3>
@@ -194,7 +204,7 @@ export default function RTLPage() {
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
-                <Accessibility />
+                <MergeTypeIcon />
               </CardIcon>
               <p className={classes.cardCategory}>סך הלוואות</p>
               <h3 className={classes.cardTitle}>{store.loans}</h3>

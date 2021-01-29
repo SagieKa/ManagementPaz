@@ -192,7 +192,7 @@ export default function TableMaterial() {
                 var item = history.location.pathname
                 var lastChar = item.substr(item.length - 1);
                console.log(lastChar)
-                history.push(`/rtl/icons/${rowData.tableData.id}`)
+                history.push(`/rtl/asset/${rowData.tableData.id}`)
                 
 
               }
