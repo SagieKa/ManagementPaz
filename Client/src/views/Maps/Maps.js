@@ -80,7 +80,7 @@ withScriptjs(
         ]
       }}
     >
-      {console.log(props.maps)}
+    
       {props.maps.map((m,i)=>{
            return  <Marker position={
             m
