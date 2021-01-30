@@ -41,7 +41,8 @@ export default function Middlew() {
         numWeek:[],
         numMount:[],
         num3Mount:[],
-        maps:[]
+        maps:[],
+        newFlow:0
     
       })
     const getLength =(assets)=>{
@@ -75,11 +76,25 @@ export default function Middlew() {
       let name=''
       let tempMap={lat:0,lng:0}
       let maps=[]
-       
+      let calc=0
+      let newFlow=0
       var today = moment().startOf('day');
-
+      var todayMount = moment().startOf('month');
+      let mounts=0
+      let numberMounts=0
 
       assets.map((o,i)=>{
+        mounts = moment(o['buy-date']).startOf('month');
+        numberMounts=Math.round(moment.duration(todayMount - mounts).asMonths())
+        console.log(numberMounts)
+        calc = o['current-value']-o['purchase-price']
+        console.log(calc)
+        calc = calc / numberMounts
+        console.log(calc)
+        calc +=o['flow']
+        console.log(calc)
+        newFlow+=calc
+        calc=0
         tempMap['lat']=parseFloat(o['x'])
         tempMap['lng']=parseFloat(o['y'])
         maps.push(tempMap)
@@ -126,6 +141,7 @@ export default function Middlew() {
       
         
       })
+      newFlow=newFlow.toFixed(2)
 console.log(maps)
       setStore(prev=>({
         ...prev ,
@@ -146,7 +162,8 @@ console.log(maps)
         numWeek,
         numMount,
         num3Mount,
-        maps
+        maps,
+        newFlow
     }))
 
     }

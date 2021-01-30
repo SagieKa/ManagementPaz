@@ -284,7 +284,7 @@ var today = moment().startOf('day');
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>תזרים חודשי מהוון</p>
-              <h3 className={classes.cardTitle}>-----</h3>
+              <h3 className={classes.cardTitle}>{store.newFlow}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
