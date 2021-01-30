@@ -1,13 +1,16 @@
-import React from "react";
+import React,{useContext, useEffect}  from "react";
+
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker
 } from "react-google-maps";
+import DashData from '../../DashContent'
 
-const CustomSkinMap = withScriptjs(
-  withGoogleMap(() => (
+const CustomSkinMap = 
+withScriptjs(
+  withGoogleMap((props) => (
     <GoogleMap
       defaultZoom={8}
 
@@ -77,14 +80,34 @@ const CustomSkinMap = withScriptjs(
         ]
       }}
     >
-      <Marker position={{ lat:31.93218666610684, lng:34.829988545386165 }} />
+      {console.log(props.maps)}
+      {props.maps.map((m,i)=>{
+           return  <Marker position={
+            m
+              } />
+      })}
+      {/* <Marker position={props.maps[0]} />
+      <Marker position={props.maps[1]} />
+      <Marker position={props.maps[2]} /> */}
+      {/* <Marker position={
+        { lat:31.93218666610684, lng:34.829988545386165 }
+        } />
+      <Marker position={
+        { lat:30.93218666610684, lng:34.829988545386165 }
+        } />
+      <Marker position={
+        { lat:32.93218666610684, lng:34.829988545386165 }
+        } /> */}
     </GoogleMap>
   ))
 );
 
 export default function Maps() {
+  const {store,setStore}=useContext(DashData)
+  var itemMaps =store.maps
   return (
     <CustomSkinMap
+      maps={itemMaps}
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyChZPizXo_3sk70Cm4yveOd0YfQtuxc7As"
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100vh` }} />}

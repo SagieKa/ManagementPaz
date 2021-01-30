@@ -19,4 +19,6 @@ export default {
     'current-value':'שווי נוכחי',
     'loans':'הלוואות',
     'flow':'תזרים',
+    'x':'רוחב',
+    'y':'אורך'
 }

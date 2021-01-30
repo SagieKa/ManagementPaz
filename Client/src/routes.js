@@ -83,7 +83,7 @@ const dashboardRoutes = [
     rtlName: "מפות",
     icon: LocationOn,
     component: Maps,
-    layout: "/admin"
+    layout: "/rtl"
   },
   {
     path: "/notifications",

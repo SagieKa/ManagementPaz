@@ -66,7 +66,7 @@ function Temp(props){
       delete unit.Contant
       delete unit.Financial
       delete unit.Operative
-      // delete unit.Operative
+      delete unit.Renter
       setUnit(unit)
       }catch{}
     }, [])
@@ -77,35 +77,21 @@ function Temp(props){
               {
               Object.keys(unit).map(function(key, index) {
                 var str = String(unit[key])
+                console.log(key)
+                console.log(index)
+                console.log(str)
                 if(key!='id') return(
-                
                   <GridItem xs={12} sm={12} md={2}>
                       {itemProps(assetFormat[key],str)}
                   </GridItem> 
-                // <Feed.Date  content={itemProps(assetFormat[key],str)}/>
+               
                 
                 )
               })
               
             }
 
-      {/* <Feed>
-        <Feed.Event>
-
-          <Feed.Content>
-            {
-              Object.keys(unit).map(function(key, index) {
-                var str = String(unit[key])
-                return(<Feed.Date  content={itemProps(assetFormat[key],str)}/>)
-              })
-              
-            }
-
-            
-          </Feed.Content>
-        </Feed.Event>
-
-      </Feed> */}
+    
     </GridContainer>
   )
 }

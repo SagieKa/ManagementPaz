@@ -331,9 +331,9 @@ var today = moment().startOf('day');
                 tabIcon: DateRangeIcon,
                 tabContent: (
                   <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={threeMount}
+                    checkedIndexes={[]}
+                    tasksIndexes={[...store.num3Mount]}
+                    tasks={store.pay3Mount}
                     rtlActive
                   />
                 )
@@ -343,9 +343,9 @@ var today = moment().startOf('day');
                 tabIcon: TodayIcon,
                 tabContent: (
                   <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={mount}
+                    checkedIndexes={[]}
+                    tasksIndexes={[...store.numMount]}
+                    tasks={store.payMount}
                     rtlActive
                   />
                 )
@@ -355,9 +355,9 @@ var today = moment().startOf('day');
                 tabIcon: CalendarTodayIcon,
                 tabContent: (
                   <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={week}
+                    checkedIndexes={[]}
+                    tasksIndexes={[...store.numWeek]}
+                    tasks={store.payWeek}
                     rtlActive
                   />
                 )
@@ -365,7 +365,7 @@ var today = moment().startOf('day');
             ]}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={12}>
+        {/* <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="warning">
               <h4 className={classes.cardTitleWhite}>آمار کارکنان</h4>
@@ -463,7 +463,7 @@ var today = moment().startOf('day');
               </Button>
             </CardBody>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
     </div>
   );

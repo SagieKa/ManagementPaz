@@ -1,12 +1,25 @@
 import React ,{useState} from "react";
 import firebase from 'firebase'
+import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from "components/CustomInput/CustomInput.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
+import Divider from '@material-ui/core/Divider';
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import Alert from '@material-ui/lab/Alert';
+const useStyles = makeStyles((theme) => ({
+  root: {
+borderTop:'8px solid #bbb',
+borderRadius:'5px'
+  },
+}));
+
 
 export default function Part3Edit(props) {
-
+  const [alert , setAlert] = useState(0)
+  const classes = useStyles();
   const id=props.id
   console.log(props.nis)
   const [asset , setAsset] = useState({})
@@ -22,6 +35,7 @@ export default function Part3Edit(props) {
         return newOne
     })}
     const updatePart3=()=>{
+      setAlert(1)
       Object.keys(asset).map(function(key, index) {
         // myObject[key] *= 2;
         firebase.database().ref(`assets/${props.id}/Operative/${key}`).set(
@@ -30,8 +44,33 @@ export default function Part3Edit(props) {
       });
     }
     return(
-      props.nis.map((n,i)=>{return(
       <GridContainer>
+                              <Card>
+      <CardHeader color="rose">
+        <h4 >פרטים תפעוליים </h4>
+      </CardHeader>
+      
+      </Card>
+      {props.nis.map((n,i)=>{return(
+      <GridContainer>
+                <GridItem xs={12} sm={12} md={3}>
+                      <CustomInput
+                        send={handleINCustomInput}
+                        labelText="רשומה"
+                        id={"contantsType"+i}
+                        formControlProps={{
+                          fullWidth: true ,
+                          "& .MuiInputLabel-formControl": {
+                            left:'1'
+                          }
+                        }}
+                        inputProps={{
+                          disabled: true,
+                          defaultValue:i+1,
+                          left:-1
+                        }}
+                      />
+                    </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     send={handleINCustomInput}
@@ -109,7 +148,7 @@ export default function Part3Edit(props) {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={9}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                    send={handleINCustomInput}
                   labelText="הערות"
@@ -122,6 +161,18 @@ export default function Part3Edit(props) {
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={12}>
+                    <Divider light={true} className={classes.root}/>
+                    </GridItem>
+              </GridContainer>
+ )})}
+                 {alert?
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Alert variant="outlined" severity="success">
+                      הפריט עודכן בהצלחה
+                    </Alert>
+                    </GridItem>
+                    :''}
                 <Button
                   fullWidth
                   color="success"
@@ -129,7 +180,6 @@ export default function Part3Edit(props) {
                 >
                  עדכן
                 </Button>
-              </GridContainer>
- )})
+ </GridContainer>
   );
 }

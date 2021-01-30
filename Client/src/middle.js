@@ -19,6 +19,7 @@ export default function Middlew() {
     var today = moment().startOf('day');
     //we work with - --> if is week ites 7 if mount -30 3 mount -90
     console.log(Math.round(moment.duration(today - m).asDays()))
+
     const [store,setStore]=React.useState({
         assets:[] , 
         numEdit:4,
@@ -34,6 +35,13 @@ export default function Middlew() {
         statusRent:0,
         statusNoRent:0,
         statusSale:0,
+        payWeek:[],
+        payMount:[],
+        pay3Mount:[],
+        numWeek:[],
+        numMount:[],
+        num3Mount:[],
+        maps:[]
     
       })
     const getLength =(assets)=>{
@@ -58,7 +66,25 @@ export default function Middlew() {
       let statusRent=0
       let statusNoRent=0
       let statusSale=0
+      let payWeek=[]
+      let numWeek=[]
+      let payMount=[]
+      let numMount=[]
+      let pay3Mount=[]
+      let num3Mount=[]
+      let name=''
+      let tempMap={lat:0,lng:0}
+      let maps=[]
+       
+      var today = moment().startOf('day');
+
+
       assets.map((o,i)=>{
+        tempMap['lat']=parseFloat(o['x'])
+        tempMap['lng']=parseFloat(o['y'])
+        maps.push(tempMap)
+        tempMap={lat:0,lng:0}
+        name=o['adress']
        if(o['delivery-date']==="נמכר"){
        priceOfSale+=o['current-value']
        statusSale+=1
@@ -72,10 +98,35 @@ export default function Middlew() {
         flow+=o['flow']
         renterPrice+=o['Renter']['0']['renters-money']
         insurance+=o['insurance']
+        o['Financial'].map((f,i)=>{
+          var m = moment(f['financial-date']);
+          console.log(Math.round(moment.duration(today - m).asDays()))
+          var days=Math.round(moment.duration(today - m).asDays())
+          var message='נדרש לשלם '
+          message+=f['financial-details']
+          message+=' בנכס בכתובת '
+          message+=name
+          message += ' תשלום '+f['financial-payment'] + " ש''ח"
+          message+=" ומע''מ "
+          message+=f['financial-vat']
+          if(days<0 && days>-8){
+            numWeek.push(payWeek.length)
+            payWeek.push(message)
+          }
+          if(days<-8 && days>-30){
+            numMount.push(payMount.length)
+            payMount.push(message)
+          } 
+          if(days<-30 && days>-90) {
+            num3Mount.push(pay3Mount.length)
+            pay3Mount.push(message)
+          }
+        })
+
       
         
       })
-
+console.log(maps)
       setStore(prev=>({
         ...prev ,
         sumOfAssets:currentValue,
@@ -88,7 +139,14 @@ export default function Middlew() {
         statusBuild,
         statusRent,
         statusNoRent,
-        statusSale
+        statusSale,
+        payWeek,
+        payMount,
+        pay3Mount,
+        numWeek,
+        numMount,
+        num3Mount,
+        maps
     }))
 
     }

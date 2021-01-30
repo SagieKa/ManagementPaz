@@ -7,11 +7,13 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Button from "components/CustomButtons/Button.js";
+import Alert from '@material-ui/lab/Alert';
 
 
 
 export default function Part1Edit(props) {
   const [asset , setAsset] = useState({})
+  const [alert , setAlert] = useState(0)
   console.log(props.nis)
   const handleINCustomInput= (type,value)=>{
     const object ={}
@@ -22,6 +24,7 @@ export default function Part1Edit(props) {
       ...object})
   }
   const updatePart1=()=>{
+    setAlert(1)
     firebase.database().ref(`assets/${props.id}`).set(
       {...props.nis,...asset}
     );
@@ -356,9 +359,42 @@ export default function Part1Edit(props) {
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                  labelText="רוחב"
+                    id="x"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:props.nis===undefined? '':props.nis["x"]
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                  send={handleINCustomInput}
+                  labelText="אורך"
+                    id="y"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      defaultValue:props.nis===undefined? '':props.nis["y"]
+                    }}
+                  />
+                </GridItem>
+                {alert?
+                  <GridItem xs={12} sm={12} md={12}>
+                    <Alert variant="outlined" severity="success">
+                      הפריט עודכן בהצלחה
+                    </Alert>
+                    </GridItem>
+                    :''}
                 <Button
                   fullWidth
-                  color="success"
+                  color="info"
                   onClick={updatePart1}
                 // }
                 >

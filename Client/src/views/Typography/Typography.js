@@ -114,7 +114,7 @@ for (var i=1; i<=numAssets; i++) {
 }
   return (
     <Card>
-      <CardHeader color="primary">
+      {activeStep?'':<CardHeader color="primary">
         <h4 className={classes.cardTitleWhite}>עריכת נכס ספציפי</h4>
         {activeStep==0?
                <p className={classes.cardCategoryWhite}>
@@ -134,7 +134,7 @@ for (var i=1; i<=numAssets; i++) {
         :''}
 
 
-      </CardHeader>
+      </CardHeader>}
       <CardBody>
     {steps[activeStep]}
     <MobileStepper

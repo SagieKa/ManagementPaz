@@ -124,7 +124,7 @@ export default function TableList() {
           </Card>
           
       </GridItem>
-      <GridItem xs={12} sm={12} md={12}>
+      {/* <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>טבלה מספר אחת</h4>
@@ -188,7 +188,7 @@ export default function TableList() {
             />
           </CardBody>
         </Card>
-      </GridItem>
+      </GridItem> */}
 
     </GridContainer>
   );
