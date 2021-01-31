@@ -79,23 +79,7 @@ export default function RTL({ ...rest }) {
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
-    console.log('i am begin')
-    // var assetdB
-    // const assetRef = firebase.database().ref('assets')
-    // assetRef.on('value', (snapshot)=>{
-    // assetdB= snapshot.val()
-    // console.log(assetdB)
-    // console.log('the db in one store:')
-    // console.log(assetdB)
-    
-    // })
-    // setStore(prev=>()=>{
-    //   console.log(prev)
-    //   var newStore= {}
-    //   newStore = {...prev,assets:[4]}
-    //   return newStore
   
-    // })
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,

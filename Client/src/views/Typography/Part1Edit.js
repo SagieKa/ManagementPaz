@@ -9,6 +9,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Button from "components/CustomButtons/Button.js";
 import Alert from '@material-ui/lab/Alert';
 import {Link} from 'react-scroll'
+import DashData from '../../DashContent'
 import { scroller } from "react-scroll";
 
 
@@ -16,8 +17,9 @@ import { scroller } from "react-scroll";
 export default function Part1Edit(props) {
   const [asset , setAsset] = useState({})
   const [alert , setAlert] = useState(0)
+  const {store,setStore}=useContext(DashData)
   const section1Ref = useRef(null);
-  console.log(props.nis)
+ 
   const handleINCustomInput= (type,value)=>{
     const object ={}
     object[type]=value
@@ -29,7 +31,7 @@ export default function Part1Edit(props) {
   const updatePart1=()=>{
     setAlert(1)
     // scrollTo(section1Ref)
-    firebase.database().ref(`assets/${props.id}`).set(
+    firebase.database().ref(`assets/${store.allItems[props.id]}`).set(
       {...props.nis,...asset}
     );
     
@@ -404,22 +406,22 @@ export default function Part1Edit(props) {
                     </Alert>
                     </GridItem>
                     :''}
-                <Button
+                {/* <Button
                   fullWidth
                   color="info"
                   onclick={scrollToSection}
                 
                 >
                  עדכן
-                </Button>
-                {/* <Button
+                </Button> */}
+                <Button
                   fullWidth
                   color="info"
                   onClick={updatePart1}
                 
                 >
                  עדכן
-                </Button> */}
+                </Button>
                 <Link activeClass="active"  to="test" spy={true} smooth={true}>Test</Link>
               </GridContainer>
 

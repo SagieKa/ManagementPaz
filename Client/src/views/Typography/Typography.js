@@ -80,7 +80,7 @@ export default function TypographyPage() {
       <Part5Edit id={0} nis={store.assets.length==0? '':store.assets[0]['Renter']}/>,
       <Done/> ])},[])
   useEffect(()=>{
-        setNumAssets(store.assets.length)
+        setNumAssets(store.tableD.length)
   },[])
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -92,7 +92,7 @@ export default function TypographyPage() {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
-    var changeStore=store.assets[event.target.value-1]
+    var changeStore=store.tableD[event.target.value-1]
     var numID=event.target.value-1
     setAge(event.target.value)
     setStore(prev=>({

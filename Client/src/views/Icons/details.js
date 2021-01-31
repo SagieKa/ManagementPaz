@@ -21,7 +21,7 @@ const styles = {
   
   const useStyles = makeStyles(styles);
   const item =(label,value)=>{
-    console.log(value)
+
       return(
         <CustomInput
         labelText={label}
@@ -59,9 +59,10 @@ function Temp(props){
       var item = history.location.pathname
       var lastChar = item.substr(item.length - 1);
       console.log(lastChar)
-      var unit = Object.assign({}, store.assets[lastChar]);
-      console.log(store.assets[lastChar])
-      // var unit = store.assets[props.num]
+      var unit = Object.assign({}, store.tableD[lastChar]);
+      console.log(unit)
+      
+      
       try{
       delete unit.Contant
       delete unit.Financial
@@ -77,9 +78,6 @@ function Temp(props){
               {
               Object.keys(unit).map(function(key, index) {
                 var str = String(unit[key])
-                console.log(key)
-                console.log(index)
-                console.log(str)
                 if(key!='id') return(
                   <GridItem xs={12} sm={12} md={2}>
                       {itemProps(assetFormat[key],str)}

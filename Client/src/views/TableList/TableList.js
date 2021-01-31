@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext,useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -9,6 +9,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import firebase from '../../utils/firebase'
+import DashData from '../../DashContent'
 import TableMaterial from './MaterialTable'
 
 const styles = {
@@ -45,67 +46,37 @@ const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
+  const {store,setStore}=useContext(DashData)
   const [TableDate,setTableDate]= useState([])
   useEffect(()=>{
-    const assetRef = firebase.database().ref('assets')
-    console.log(assetRef)
-    assetRef.on('value', (snapshot)=>{
-      console.log(snapshot.length)
-      var asset=snapshot.val()
-      console.log(asset)
-      asset.map((o,i)=>{
-        console.log(o.entrepreneur)
+    store.assets.map((o,i)=>{
+      console.log(o['buy-date'])
         setTableDate(prev=>[...prev ,
-          [asset[i]['buy-date'],
-          asset[i]['delivery-date'],
-          asset[i]['project'],
-          asset[i]['bank'],
-          asset[i]['entrepreneur'],
-          asset[i]['contractor'],
-          asset[i]['city'],
-          asset[i]['adress'],
-          asset[i]['building'],
-          asset[i]['floor'],
-          asset[i]['number'],
-          asset[i]['rooms'],
-          asset[i]['size(sqm)'],
-          asset[i]['terrace(sqm)'],
-          asset[i]['storage'],
-          asset[i]['parking'],
-          asset[i]['purchase-price'],
-          asset[i]['current-value'],
-          asset[i]['loans'],
-          asset[i]['flow']]
-          
+          [o['buy-date'],
+          o['delivery-date'],
+          o['project'],
+          o['bank'],
+          o['entrepreneur'],
+          o['contractor'],
+          o['city'],
+          o['adress'],
+          o['building'],
+          o['floor'],
+          o['number'],
+          o['rooms'],
+          o['size(sqm)'],
+          o['terrace(sqm)'],
+          o['storage'],
+          o['parking'],
+          o['purchase-price'],
+          o['current-value'],
+          o['loans'],
+          o['flow']],
          
          ])
       })
-    //   setTableDate([...TableDate ,
-    //      asset['buy-date'],
-    //      asset['delivery-date'],
-    //      asset['project'],
-    //      asset['bank'],
-    //      asset['entrepreneur'],
-    //      asset['contractor'],
-    //      asset['city'],
-    //      asset['adress'],
-    //      asset['building'],
-    //      asset['floor'],
-    //      asset['number'],
-    //      asset['rooms'],
-    //      asset['size(sqm)'],
-    //      asset['terrace(sqm)'],
-    //      asset['storage'],
-    //      asset['parking'],
-    //      asset['purchase-price'],
-    //      asset['current-value'],
-    //      asset['loans'],
-    //      asset['flow'],
-         
-        
-    //     ])
-      
-    })
+  console.log('the table data:')
+  console.log(TableDate)
   },[])
   return (
     <GridContainer>
@@ -119,7 +90,7 @@ export default function TableList() {
           </CardHeader>
           <CardBody>
 
-        <TableMaterial/>
+        <TableMaterial TableDate={TableDate}/>
           </CardBody>
           </Card>
           

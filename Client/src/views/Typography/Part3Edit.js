@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React ,{useState,useContext} from "react";
 import firebase from 'firebase'
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from "components/CustomInput/CustomInput.js";
@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import Alert from '@material-ui/lab/Alert';
+import DashData from '../../DashContent'
 const useStyles = makeStyles((theme) => ({
   root: {
 borderTop:'8px solid #bbb',
@@ -19,9 +20,10 @@ borderRadius:'5px'
 
 export default function Part3Edit(props) {
   const [alert , setAlert] = useState(0)
+  const {store,setStore}=useContext(DashData)
   const classes = useStyles();
   const id=props.id
-  console.log(props.nis)
+ 
   const [asset , setAsset] = useState({})
 
   const handleINCustomInput= (type,value)=>{
@@ -38,7 +40,7 @@ export default function Part3Edit(props) {
       setAlert(1)
       Object.keys(asset).map(function(key, index) {
         // myObject[key] *= 2;
-        firebase.database().ref(`assets/${props.id}/Operative/${key}`).set(
+        firebase.database().ref(`assets/${store.allItems[props.id]}/Operative/${key}`).set(
           {...props.nis[key],...asset[key]}
         );
       });

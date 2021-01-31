@@ -63,8 +63,6 @@ export default function CustomSelect(props) {
       ) : null}
         <Select
         onChange={(e)=>{
-            console.log(id)
-            console.log(e.target)
             send(id,e.target.value)}}
         classes={{
           root: marginTop,

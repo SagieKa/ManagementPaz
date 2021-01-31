@@ -22,12 +22,14 @@ const useStyles = makeStyles(theme => ({
   }));
 
   
-export default function TableMaterial() {
+export default function TableMaterial(props) {
+  const [Data,SetDate]=React.useState([])
     const classes = useStyles();
     const location = useLocation()
     let { slug } = useParams()
     const history = useHistory()
   const {store,setStore}=useContext(DashData)
+  // store.assets
 
   return (
     <div className={classes.root}>
@@ -158,7 +160,7 @@ export default function TableMaterial() {
          
             },
           ]}
-          data={store.assets}
+          data={store.tableD}
           title="רשימת פרטי נכס"
           icons={{
             Clear: (props) => <DeleteIcon />,
@@ -191,7 +193,7 @@ export default function TableMaterial() {
                
                 var item = history.location.pathname
                 var lastChar = item.substr(item.length - 1);
-               console.log(lastChar)
+              
                 history.push(`/rtl/asset/${rowData.tableData.id}`)
                 
 

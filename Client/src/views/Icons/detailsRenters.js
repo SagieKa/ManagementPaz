@@ -21,7 +21,7 @@ const styles = {
   
   const useStyles = makeStyles(styles);
   const item =(label,value)=>{
-    console.log("here")
+  
       return(
         <CustomInput
         labelText={label}
@@ -56,10 +56,10 @@ function DetailsRenters(props){
     useEffect(() => {
       var item = history.location.pathname
       var lastChar = item.substr(item.length - 1);
-        console.log(store.assets)
-      var newUnit = store.assets[lastChar]
+       
+      var newUnit = store.tableD[lastChar]
     try{
-        console.log(unit)
+      
         setUnit(newUnit['Renter'])}catch{}
     }, [])
   return(
@@ -70,7 +70,7 @@ function DetailsRenters(props){
                 o.id=i+1
              return Object.keys(o).map(function(key, index) {
                 var str = String(o[key])
-                console.log(assetFormat[key])
+              
                 if(index==0) return(
                   <GridItem xs={12} sm={12} md={4}>
 

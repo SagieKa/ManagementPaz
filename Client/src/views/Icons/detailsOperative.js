@@ -10,7 +10,7 @@ import GridItem from "components/Grid/GridItem.js";
 import { useHistory } from 'react-router-dom';
   ;
   const item =(label,value)=>{
-    console.log("here")
+  
       return(
         <GridItem xs={12} sm={12} md={2}>
         <CustomInput
@@ -45,10 +45,10 @@ function DetailsOperative(props){
     useEffect(() => {
       var item = history.location.pathname
       var lastChar = item.substr(item.length - 1);
-        console.log(store.assets)
-      var newUnit = store.assets[lastChar]
+        
+      var newUnit = store.tableD[lastChar]
     try{
-        console.log(unit)
+       
         setUnit(newUnit['Operative'])}catch{}
     }, [])
     return(
@@ -60,7 +60,7 @@ function DetailsOperative(props){
                       o.id=i+1
                    return(   <GridContainer > {Object.keys(o).map(function(key, index) {
                       var str = String(o[key])
-                      console.log(assetFormat[key])
+                     
                        return(
                       
                           itemProps(assetFormat[key],str)

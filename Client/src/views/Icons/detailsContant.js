@@ -20,7 +20,6 @@ const styles = {
   
   const useStyles = makeStyles(styles);
   const item =(label,value)=>{
-    console.log("here")
       return(
         <CustomInput
         labelText={label}
@@ -55,10 +54,11 @@ function DetailsContant(props){
     useEffect(() => {
       var item = history.location.pathname
       var lastChar = item.substr(item.length - 1);
-        console.log(store.assets)
-      var newUnit = store.assets[lastChar]
+     console.log(lastChar)
+      var newUnit = store.tableD[lastChar]
+      console.log(newUnit)
     try{
-        console.log(unit)
+      
         setUnit(newUnit['Contant'])}catch{}
     }, [])
   return(
@@ -68,8 +68,9 @@ function DetailsContant(props){
             unit.map((o,i)=>{
                 o.id=i+1
              return Object.keys(o).map(function(key, index) {
+               console.log(o[key])
                 var str = String(o[key])
-                console.log(assetFormat[key])
+                // (assetFormat[key])
                 if(index==0) return(
                   <GridItem xs={12} sm={12} md={2}>
 

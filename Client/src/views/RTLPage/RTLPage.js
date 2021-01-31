@@ -134,7 +134,7 @@ var today = moment().startOf('day');
                 </Danger>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
                  קבל יותר מקום {moment('20211031').startOf('day').fromNow()}
-                 קבל יותר מקום {console.log(Math.round(moment.duration(today - m).asDays()))}
+
                 </a>
               </div>
             </CardFooter>

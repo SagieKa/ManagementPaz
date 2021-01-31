@@ -17,8 +17,7 @@ const hist = createBrowserHistory();
 export default function Middlew() {
     var m = moment("2021-03-01"); 
     var today = moment().startOf('day');
-    //we work with - --> if is week ites 7 if mount -30 3 mount -90
-    console.log(Math.round(moment.duration(today - m).asDays()))
+
 
     const [store,setStore]=React.useState({
         assets:[] , 
@@ -42,13 +41,21 @@ export default function Middlew() {
         numMount:[],
         num3Mount:[],
         maps:[],
-        newFlow:0
+        newFlow:0,
+        tableD:[],
+        allItems:[]
     
       })
     const getLength =(assets)=>{
       let length
+      
+      var newAsset = assets.filter(function (el) {
+        return el != null;
+      });
       try {
-        length=assets.length
+        length=newAsset.length
+        console.log(newAsset)
+        console.log(length)
       } catch (error) {
         length=0
       }
@@ -82,17 +89,23 @@ export default function Middlew() {
       var todayMount = moment().startOf('month');
       let mounts=0
       let numberMounts=0
+      let tableD = assets.filter(function (el) {
+        return el != null;
+      });
+      let allItems=[]
 
+      console.log(assets)
       assets.map((o,i)=>{
+        if(o!=null) allItems.push(i)
         mounts = moment(o['buy-date']).startOf('month');
         numberMounts=Math.round(moment.duration(todayMount - mounts).asMonths())
-        console.log(numberMounts)
+       
         calc = o['current-value']-o['purchase-price']
-        console.log(calc)
+      
         calc = calc / numberMounts
-        console.log(calc)
+        
         calc +=o['flow']
-        console.log(calc)
+        
         newFlow+=calc
         calc=0
         tempMap['lat']=parseFloat(o['x'])
@@ -115,7 +128,7 @@ export default function Middlew() {
         insurance+=o['insurance']
         o['Financial'].map((f,i)=>{
           var m = moment(f['financial-date']);
-          console.log(Math.round(moment.duration(today - m).asDays()))
+         
           var days=Math.round(moment.duration(today - m).asDays())
           var message='נדרש לשלם '
           message+=f['financial-details']
@@ -142,7 +155,7 @@ export default function Middlew() {
         
       })
       newFlow=newFlow.toFixed(2)
-console.log(maps)
+      console.log(allItems)
       setStore(prev=>({
         ...prev ,
         sumOfAssets:currentValue,
@@ -163,7 +176,9 @@ console.log(maps)
         numMount,
         num3Mount,
         maps,
-        newFlow
+        newFlow,
+        tableD,
+        allItems
     }))
 
     }

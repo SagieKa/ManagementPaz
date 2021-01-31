@@ -16,6 +16,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import { useState,useContext } from "react";
 import Contants from './contants'
+import DashData from '../../DashContent'
 import Operative from './operative'
 import Financial from './financial'
 import Renters  from './Renters'
@@ -24,8 +25,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import DashData from '../../DashContent'
+
 import Asset from '../Formats/assetFormat'
+import { CropLandscapeOutlined } from "@material-ui/icons";
 const assetFormat = Asset
 
 const contantFormat = {
@@ -103,7 +105,7 @@ export default function UserProfile() {
 
   const classes = useStyles();
   const [asset , setAsset] = useState(assetFormat)
-
+  const {store,setStore}=useContext(DashData)
   const [contantObject, setContantObject] =useState(contantFormat)
   const [operativeObject, setOperativeObject] =useState(operativeFormat)
   const [financialObject, setFinancialObject] =useState(financialFormat)
@@ -114,7 +116,7 @@ export default function UserProfile() {
   const [renters,setRenters]= useState([])
   
   const handleINCustomInput= (type,value)=>{
-    console.log(type+': ' +value)
+  
     const regexContant = new RegExp('contants')
     const regexOperative = new RegExp('operative')
     const regexFinancial= new RegExp('financial')
@@ -133,7 +135,7 @@ export default function UserProfile() {
   const [renter,setRenter]=useState([<Renters send={handleINCustomInput} id={0}/>])
 
   const AddAseet = (type,value) =>{
-    console.log(type + ' '+ value)
+  
     const object ={}
     object[type]=value
     if(type=='current-value' ||type=='purchase-price' ||type=='flow'||type=='loans'||type=='insurance') object[type]=parseInt(value)
@@ -165,25 +167,25 @@ export default function UserProfile() {
     }
 
     const onCloseContants= (i)=>{
-      console.log('in close contants')
+     
         let arr = [...contants]
         arr.splice(i,1);
         setContants(arr)
     }
     const onCloseOperative= (i)=>{
-      console.log('in close Operative')
+    
         let arr = [...operatives]
         arr.splice(i,1);
         setOperatives(arr)
     }
     const onCloseFinancial= (i)=>{
-      console.log('in close financial')
+    
         let arr = [...financials]
         arr.splice(i,1);
         setFinancials(arr)
     }
     const onCloseRenter= (i)=>{
-      console.log('in close Renter')
+     
         let arr = [...renters]
         arr.splice(i,1);
         setRenters(arr)
@@ -199,44 +201,40 @@ export default function UserProfile() {
     }
   
     const  pressAddContant = () =>{
-      console.log(contantObject)
+     
     setContants(prev=>([...prev,contantObject]))
    
   }
     const  pressAddOperative = () =>{
-      console.log(contantObject)
+     
     setOperatives(prev=>([...prev,operativeObject]))
    
   }
     const  pressAddFinancial = () =>{
-      console.log(contantObject)
+      
       setFinancials(prev=>([...prev,financialObject]))
    
   }
     const  pressAddRenters = () =>{
-      console.log(renterObject)
+     
       setRenters(prev=>([...prev,renterObject]))
    
   }
 
   const getTheNumber = ()=>{
-    var number=0
-    
-      console.log('hi i am try')
-        const assetRef = firebase.database().ref('assets')
-        assetRef.on('value', (snapshot)=>{
-          var assetdB= snapshot.val()
-          try{
-           
-          number =assetdB.length}
-          catch{number=0}
-          console.log(number)
-          console.log(assetdB)
-    })
+    var number=1
+    var arr = store.allItems
+    console.log(arr)
+    var last = arr.slice(-1)[0]
+    console.log(last)
+    console.log(last+1)
+    number=last +1
+      
+        
+        console.log(number)
             return new Promise(resolve => {
           setTimeout(function() {
-            console.log('i am promise 2')
-            console.log(number)
+ 
           resolve(number)
         }, 1000)})
 
@@ -245,8 +243,7 @@ export default function UserProfile() {
   async function pushAseetsToDb(){
      const A = await orderAseets()
      const number = await getTheNumber()
-     console.log('the number of pushDb:')
-     console.log(number)
+
      
 
     firebase.database().ref(`assets/${number}`).set(
@@ -276,9 +273,9 @@ const orderAseets= async()=>{
 
   return new Promise(resolve => {
     setTimeout(function() {
-      console.log('hi i am in the promise')
+      
       resolve([objectC,objectO,objectF,objectR ])
-      console.log("fast promise is done")
+    
     }, 1000)
   })
  
