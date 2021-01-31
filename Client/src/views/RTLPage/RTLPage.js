@@ -148,7 +148,7 @@ var today = moment().startOf('day');
               </CardIcon>
               <p className={classes.cardCategory}>עלות הנכסים</p>
               <h3 className={classes.cardTitle}>
-              {store.purchasePrice}
+              {store.purchasePrice.toLocaleString()}
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -170,7 +170,7 @@ var today = moment().startOf('day');
                 <AccountBalanceIcon />
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים קיימים</p>
-              <h3 className={classes.cardTitle}>{store.sumOfAssets}</h3>
+              <h3 className={classes.cardTitle}>{store.sumOfAssets.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -190,7 +190,7 @@ var today = moment().startOf('day');
                 <AccountBalanceWalletIcon/>
               </CardIcon>
               <p className={classes.cardCategory}>שווי נכסים שנמכרו</p>
-              <h3 className={classes.cardTitle}>{store.priceOfSale}</h3>
+              <h3 className={classes.cardTitle}>{store.priceOfSale.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -207,7 +207,7 @@ var today = moment().startOf('day');
                 <MergeTypeIcon />
               </CardIcon>
               <p className={classes.cardCategory}>סך הלוואות</p>
-              <h3 className={classes.cardTitle}>{store.loans}</h3>
+              <h3 className={classes.cardTitle}>{store.loans.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -225,7 +225,7 @@ var today = moment().startOf('day');
               </CardIcon>
               <p className={classes.cardCategory}>סך ביטוחים חודשי</p>
               <h3 className={classes.cardTitle}>
-              {store.insurance}<small></small>
+              {store.insurance.toLocaleString()}<small></small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -250,7 +250,7 @@ var today = moment().startOf('day');
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>סך שכירויות חודשי</p>
-              <h3 className={classes.cardTitle}>{store.renterPrice}</h3>
+              <h3 className={classes.cardTitle}>{store.renterPrice.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -267,7 +267,7 @@ var today = moment().startOf('day');
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>תזרים חודשי</p>
-              <h3 className={classes.cardTitle}>{store.flow}</h3>
+              <h3 className={classes.cardTitle}>{store.flow.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -284,7 +284,7 @@ var today = moment().startOf('day');
                 <Accessibility />
               </CardIcon>
               <p className={classes.cardCategory}>תזרים חודשי מהוון</p>
-              <h3 className={classes.cardTitle}>{store.newFlow}</h3>
+              <h3 className={classes.cardTitle}>{store.newFlow.toLocaleString()}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

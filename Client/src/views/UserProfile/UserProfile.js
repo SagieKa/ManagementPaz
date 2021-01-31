@@ -163,6 +163,31 @@ export default function UserProfile() {
     if(newType=='financial-payment' || newType=='financial-vat') object[newType]=parseInt(value)
     setFinancialObject(prev=>({...prev,id:num,...object}))
     }
+
+    const onCloseContants= (i)=>{
+      console.log('in close contants')
+        let arr = [...contants]
+        arr.splice(i,1);
+        setContants(arr)
+    }
+    const onCloseOperative= (i)=>{
+      console.log('in close Operative')
+        let arr = [...operatives]
+        arr.splice(i,1);
+        setOperatives(arr)
+    }
+    const onCloseFinancial= (i)=>{
+      console.log('in close financial')
+        let arr = [...financials]
+        arr.splice(i,1);
+        setFinancials(arr)
+    }
+    const onCloseRenter= (i)=>{
+      console.log('in close Renter')
+        let arr = [...renters]
+        arr.splice(i,1);
+        setRenters(arr)
+    }
   
   function AddRenter(type,value){
     var num = type.charAt(type.length-1);
@@ -571,9 +596,9 @@ const orderAseets= async()=>{
               </GridContainer>
 
             </CardBody>
-            <CardFooter>
+            {/* <CardFooter>
               <Button color="primary" onClick={pushAseetsToDb}>הוסף נכס</Button>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         </GridItem>
       </GridContainer>
@@ -582,16 +607,16 @@ const orderAseets= async()=>{
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>הכנס אנשי קשר</h4>
-              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+              <p className={classes.cardCategoryWhite}>לחץ על הוסף על מנת להוסיף איש קשר</p>
             </CardHeader>
             <CardBody>
 
               {contants.length!=0?((
                 contants.map((object,i)=>{return(
 
-                  <Alert onClose={() => {console.log('hi')}}>{
+                  <Alert onClose={() => {onCloseContants(i)}}>{
                     
-                    i+'->'+
+                    `${i+1}`+')'+
                     'סוג:'+object.contantsType+' '+
                     'שם החברה:'+object.contantsCompanyName+' '+
                     'שם מלא:'+object.contantsFullname+' '+
@@ -613,7 +638,7 @@ const orderAseets= async()=>{
 
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={pressAddContant}>הוסף איש קשר נוסף</Button>
+              <Button color="primary" onClick={pressAddContant}>הוסף איש קשר</Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -623,17 +648,17 @@ const orderAseets= async()=>{
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>תפעולי  </h4>
-              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+              <p className={classes.cardCategoryWhite}>לחץ על הוסף על מנת להוסיף איש תפעולי</p>
             </CardHeader>
             <CardBody>
 
             {operatives.length!=0?((
                 operatives.map((object,i)=>{return(
 
-                  <Alert onClose={() => {console.log('hi')}}>
+                  <Alert onClose={() => {onCloseOperative(i)}}>
                     {
                     
-                    i+'->'+
+                    `${i+1}`+')'+
                     'כללי:'+object['operative-general']+' '+
                     'פירוט:'+object["operative-details"]+' '+
                     'סטטוס:'+object["operative-status"]+' '+
@@ -653,13 +678,13 @@ const orderAseets= async()=>{
 
             </CardBody>
             <CardFooter>
-              <Button color="primary" onClick={pressAddOperative}> תפעולי הוסף</Button>
+              <Button color="primary" onClick={pressAddOperative}> הוסף תפעולי </Button>
             
             </CardFooter>
-            <CardFooter>
+            {/* <CardFooter>
               <Button color="primary"> נכס</Button>
             
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         </GridItem>
       </GridContainer>
@@ -668,16 +693,16 @@ const orderAseets= async()=>{
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>פיננסי</h4>
-              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+              <p className={classes.cardCategoryWhite}>לחץ על הוסף על מנת להוסיף איש פיננסי</p>
             </CardHeader>
             <CardBody>
 
             {financials.length!=0?((
                 financials.map((object,i)=>{return(
 
-                  <Alert onClose={() => {console.log('hi')}}>{
+                  <Alert onClose={() => {onCloseFinancial(i)}}>{
                     
-                    i+'->'+
+                    `${i+1}`+')'+
                     'כללי:'+object['financial-general']+' '+
                     'פירוט:'+object['financial-details']+' '+
                     'הודעת תשלום:'+object['financial-message-payment']+' '+
@@ -708,16 +733,16 @@ const orderAseets= async()=>{
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>שוכרים</h4>
-              <p className={classes.cardCategoryWhite}>השלם את הפרטים במלואם!</p>
+              <p className={classes.cardCategoryWhite}>לחץ על הוסף על מנת להוסיף שוכר </p>
             </CardHeader>
             <CardBody>
 
             {renters.length!=0?((
                 renters.map((object,i)=>{return(
 
-                  <Alert onClose={() => {console.log('hi')}}>{
+                  <Alert onClose={() => {onCloseRenter(i)}}>{
                     
-                    i+'->'+
+                    `${i+1}`+')'+
                     'מס:'+object['renters-count']+' '+
                     'עיר:'+object['renters-city']+' '+
                     ":שם הפרוייקט"+object['renters-name-project']+' '+
@@ -746,6 +771,9 @@ const orderAseets= async()=>{
               <Button color="primary" onClick={pressAddRenters}>הוסף פינססי</Button>
             </CardFooter>
           </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={12}>
+        <Button color="info" onClick={pushAseetsToDb} fullWidth>הוסף נכס</Button>
         </GridItem>
       </GridContainer>
     </div>

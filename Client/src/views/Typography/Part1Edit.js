@@ -1,4 +1,4 @@
-import React, { useEffect,useContext, useState } from "react";
+import React, { useEffect,useContext, useState,  useRef } from "react";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -8,12 +8,15 @@ import CardHeader from "components/Card/CardHeader.js";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Button from "components/CustomButtons/Button.js";
 import Alert from '@material-ui/lab/Alert';
+import {Link} from 'react-scroll'
+import { scroller } from "react-scroll";
 
 
 
 export default function Part1Edit(props) {
   const [asset , setAsset] = useState({})
   const [alert , setAlert] = useState(0)
+  const section1Ref = useRef(null);
   console.log(props.nis)
   const handleINCustomInput= (type,value)=>{
     const object ={}
@@ -25,21 +28,30 @@ export default function Part1Edit(props) {
   }
   const updatePart1=()=>{
     setAlert(1)
+    // scrollTo(section1Ref)
     firebase.database().ref(`assets/${props.id}`).set(
       {...props.nis,...asset}
     );
     
   }
+  const scrollToSection = () => {
+    scroller.scrollTo(section1Ref, {
+      duration: 800,
+      delay: 0,
+      smooth: "smooth",
+    });
+  };
+
 
     return(
-      <GridContainer>
-      <Card>
-      <CardHeader color="rose">
-        <h4 >פרטים כלליים</h4>
+      <GridContainer id="test">
+      <Card ref={section1Ref}>
+      <CardHeader id="test" color="rose">
+        <h4 id="test">פרטים כלליים</h4>
       </CardHeader>
       
       </Card>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={3} >
                   <CustomInput
                     send={handleINCustomInput}
                     
@@ -395,11 +407,20 @@ export default function Part1Edit(props) {
                 <Button
                   fullWidth
                   color="info"
-                  onClick={updatePart1}
-                // }
+                  onclick={scrollToSection}
+                
                 >
                  עדכן
                 </Button>
+                {/* <Button
+                  fullWidth
+                  color="info"
+                  onClick={updatePart1}
+                
+                >
+                 עדכן
+                </Button> */}
+                <Link activeClass="active"  to="test" spy={true} smooth={true}>Test</Link>
               </GridContainer>
 
   );

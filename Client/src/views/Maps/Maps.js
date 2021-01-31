@@ -86,18 +86,6 @@ withScriptjs(
             m
               } />
       })}
-      {/* <Marker position={props.maps[0]} />
-      <Marker position={props.maps[1]} />
-      <Marker position={props.maps[2]} /> */}
-      {/* <Marker position={
-        { lat:31.93218666610684, lng:34.829988545386165 }
-        } />
-      <Marker position={
-        { lat:30.93218666610684, lng:34.829988545386165 }
-        } />
-      <Marker position={
-        { lat:32.93218666610684, lng:34.829988545386165 }
-        } /> */}
     </GoogleMap>
   ))
 );
